@@ -9,6 +9,8 @@ public abstract class Solver
     protected Function f;
     protected double t;
 
+    protected  int order = 0;
+
     protected double w = NaN;
 
     /**
@@ -29,6 +31,10 @@ public abstract class Solver
         return this;
     }
 
+    public Solver setInitialTime(float t0){
+        this.t = t0;
+        return this;
+    }
     /**
      * dy/dt = f(t,y);
      * set the approximation level
@@ -65,11 +71,13 @@ public abstract class Solver
      * calculate the next state of f(t,y)
      */
     public void solve() {
-        while(this.t<= this.tf)
+        while((this.t + h )<= (this.tf))
         {
+            System.out.println("t : " + this.t + " -> w : " + this.w);
             this.step(this.w,this.h);
             this.t += this.h;
         }
+        System.out.println("t : " + this.t + " -> w : " + this.w);
     }
 
     public abstract void step(double w, double h);
@@ -80,4 +88,8 @@ public abstract class Solver
     }
 
 
+    public Solver setOrder(int i){
+        this.order = i;
+        return this;
+    }
 }
