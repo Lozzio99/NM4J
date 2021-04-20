@@ -43,7 +43,7 @@ assignment 1
     static double initialValue = 2;
 
     static float initialTime = 0;
-    static double dt = 0.05;
+    static double dt = 0.1;
     static double tf = 6;
 
     public static void main(String[] args) {
