@@ -32,25 +32,5 @@ public class Secant extends Root
     }
 
 
-    public static double findSpecialRoot(Ivp.Function f, double t1, double t2, double w1, double w2)
-    {
-        double root = NaN;
-        double epsilon = 0.001;
-        List<Double> p_stages = new ArrayList<>();
-        System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
-        System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
-        double prevt = t1, prevw = w1;
-        while(Math.abs(t2-t1)>epsilon)
-        {
-            root = t2 - ((t2-t1)/(w2-w1)*w2);
-            p_stages.add(root);
-            t1 = t2;
-            t2 = root;
-            w2 = Ralston_s2nd.Ralston2ndOrderStep(f,prevw,t2-prevt,t2);
-            w1 = Ralston_s2nd.Ralston2ndOrderStep(f,prevw,t1-prevt,t1);
-            System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
-            System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
-        }
-        return root;
-    }
+
 }

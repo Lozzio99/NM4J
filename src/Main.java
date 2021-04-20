@@ -1,7 +1,13 @@
 import Ivp.Function;
+import Ivp.Solvers.Pred_Corr.Adam_Bashforth;
 import Ivp.Solvers.Pred_Corr.Adam_Moultoun;
+import Ivp.Solvers.RungeKutta.Ralston_s2nd;
+import Ivp.Solvers.RungeKutta.Runge_kutta4th;
 import Ivp.Solvers.Solver;
 import Error.Error;
+import Roots.Secant;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Double.NaN;
@@ -13,35 +19,38 @@ public class Main
     //slides
     static Function f = (t,y)->  ( 1/Math.exp(t) ) -Math.pow(y,2) ;
 
+assignment 1
+*/
 
-    assignment 1
     static Function f = (t, y) -> {
         t = (float) t;
         return Math.sin(t) +y - Math.pow(y,3) ;
     };
-*/
+
 
 
     /* hc4
-     */
+
     static Function f = (t,y)->{
         t = (float) t;
         return Math.pow(y+t,2)-1 ;
     };
-
+ */
 
 
 
     //hc4
-    static double initialValue = 2/3.;
+    static double initialValue = 2;
 
     static float initialTime = 0;
-    static double dt = 0.5;
-    static double tf = 1.;
+    static double dt = 0.05;
+    static double tf = 6;
 
     public static void main(String[] args) {
 
 
+
+        /*
 
         Roots.Function originalF = (t)-> (2/(3-(2*t)))-t;
 
@@ -77,9 +86,12 @@ public class Main
         error(originalF, w025, 0.55,1);
 
 
+
+         */
         /*
 
          EX assignment 1
+*/
 
 
         Solver v = new Adam_Bashforth()
@@ -133,10 +145,10 @@ public class Main
 
 
 
-        double root = Secant.findSpecialRoot(f,5.2,5.25,w,w2);
-        System.out.println(root);
+        double root = findSpecialRoot(f,5.2,5.25,w,w2);
+        System.out.println("ROOT :: "+root);
         System.out.println( " 5.2 ->  +h = " + (root - 5.2 ) + "  == "+ root);
-*/
+
 
 
 
@@ -237,6 +249,62 @@ public class Main
         System.out.println(" step 1.0 -> "+ exp2);
         System.out.println("Relative error : " + Error.relativeError(exp2,w05.get(1)));
         System.out.println("Absolute Error : " + Error.absoluteError(exp2,w05.get(1)));
+    }
+
+
+
+    public static double findSpecialRoot(Function f, double t1, double t2, double w1, double w2)
+    {
+        double root = NaN;
+        double epsilon = 0.001;
+        List<Double> p_stages = new ArrayList<>();
+        System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
+        System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
+        //storing the left most value
+        double leftmost_t = t1, leftmost_w = w1;
+
+        while(Math.abs(t2-t1)>epsilon)
+        {
+            //hope the formula is correct
+            root = t2 - ((t2-t1)/(w2-w1)*w2);
+            p_stages.add(root);
+            t1 = t2;  //
+            t2 = root; //main root step
+
+            // from now, t1 is the rightmost, t2(new root) is the leftmost
+            //find f(leftmost) keep the rightmost value
+            //f(t2)  = new ,,, f(t1) was w2
+
+
+            /*
+            this also work
+
+
+            w1 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t1-leftmost_t);
+            w2 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t2-leftmost_t);
+             */
+
+
+
+            if (t1<t2) {
+                w1 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t1-leftmost_t);
+                leftmost_t = t1;
+                leftmost_w = w1;
+                w2 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t2-leftmost_t);
+            }
+            else{
+                w2 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t2-leftmost_t);
+                leftmost_t = t2;
+                leftmost_w = w2;
+                w1 = Runge_kutta4th.RungeKutta4thStep(f,leftmost_t,leftmost_w,t1-leftmost_t);
+            }
+
+
+
+            System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
+            System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
+        }
+        return root;
     }
 
 }
