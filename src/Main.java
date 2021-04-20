@@ -256,7 +256,7 @@ assignment 1
     public static double findSpecialRoot(Function f, double t1, double t2, double w1, double w2)
     {
         double root = NaN;
-        double epsilon = 0.001;
+        double epsilon = 1e-200;
         List<Double> p_stages = new ArrayList<>();
         System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
         System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
