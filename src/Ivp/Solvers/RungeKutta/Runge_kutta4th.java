@@ -1,7 +1,7 @@
-package Ivp.RungeKutta;
+package Ivp.Solvers.RungeKutta;
 
 import Ivp.Function;
-import Ivp.Solver;
+import Ivp.Solvers.Solver;
 
 public class Runge_kutta4th extends Solver
 {

@@ -1,4 +1,4 @@
-package Ivp;
+package Ivp.Solvers;
 
 public class Heun_s3rd extends Solver
 {

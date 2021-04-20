@@ -1,4 +1,4 @@
-package Ivp;
+package Ivp.Solvers;
 
 public class MidPointEuler extends Solver
 {

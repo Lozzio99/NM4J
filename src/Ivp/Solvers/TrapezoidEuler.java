@@ -1,6 +1,6 @@
-package Ivp;
+package Ivp.Solvers;
 
-public class TrapezoidEuler extends Solver{
+public class TrapezoidEuler extends Solver {
 
 
     @Override

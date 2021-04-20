@@ -10,16 +10,16 @@ public abstract class Root
     Function f;
     double epsilon;
 
-    Root(){
+    public Root(){
         this.p_stages = new ArrayList<>();
     }
 
-    Root setEpsilon(double eps){
+    public Root setEpsilon(double eps){
         this.epsilon = eps;
         return this;
     }
 
-    Root setFunction(Function f){
+    public Root setFunction(Function f){
         this.f = f;
         return this;
     }

@@ -1,4 +1,8 @@
-package Ivp;
+package Ivp.Solvers;
+
+import Ivp.Function;
+
+import java.util.List;
 
 import static java.lang.Double.NaN;
 
@@ -73,11 +77,11 @@ public abstract class Solver
     public void solve() {
         while((this.t + h )<= (this.tf))
         {
-            System.out.println("t : " + this.t + " -> w : " + this.w);
+            //System.out.println("t : " + (float)this.t + " -> w : " + this.w);
             this.step(this.w,this.h);
             this.t += this.h;
         }
-        System.out.println("t : " + this.t + " -> w : " + this.w);
+        System.out.println("t : " + (float)this.t + " -> w : " + this.w);
     }
 
     public abstract void step(double w, double h);
@@ -91,5 +95,9 @@ public abstract class Solver
     public Solver setOrder(int i){
         this.order = i;
         return this;
+    }
+
+    public List<Double> getW_t(){
+        return null;
     }
 }

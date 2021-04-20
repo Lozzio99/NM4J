@@ -1,8 +1,7 @@
-package Ivp.RungeKutta;
+package Ivp.Solvers.RungeKutta;
 
-import Ivp.Adam_Bashforth;
 import Ivp.Function;
-import Ivp.Solver;
+import Ivp.Solvers.Solver;
 
 public class Ralston_s2nd extends Solver {
     @Override
@@ -13,10 +12,15 @@ public class Ralston_s2nd extends Solver {
         this.w = w + ((1/4.)*(k1 + 3*k2));
     }
 
-    public static double Ralston2ndOrderStep(Function f, double w, double h, double t){
+    public static double Ralston2ndOrderStep(Function f, double w, double h, double t)
+    {
         double k1 = h * f.f_y(t,w);
+        //System.out.print("k1\t: "+ k1+"\t");
         double k2 = h * f.f_y(t + ((2/3.) * h),w + ((2/3.) * k1));
-        return w + ((1/4.)*h *(k1 + 3*k2));
+        //System.out.print("\tk2\t: "+k2 + "\t\t");
+        double next = w + ((1/4.)*h *(k1 + 3*k2));
+        //System.out.println("w(i+1)\t: "+next);
+        return next;
     }
 
 
