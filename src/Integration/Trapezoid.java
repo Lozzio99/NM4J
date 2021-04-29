@@ -9,16 +9,12 @@ public class Trapezoid extends Integrator
     }
 
     @Override
-    public double integrate(int a, int b) {
-        double h =((double)(b-a))/this.nodes;
-        double x0 = this.f.f_x(a), xN = this.f.f_x(b), xi = a;
-        double xk[] = new double[this.nodes-1];
-        for (int i = 0; i< xk.length; i++) {
-            xi += h;
-            xk[i] = xi;
-        }
-        double integral = 0;
+    public double integrate(int a, int b)
+    {
+       return 0;
+    }
 
-        return 0;
+    public double step(double a, double b){
+        return (b-a) * ((f.f_x(a) + f.f_x(b))/2);
     }
 }
