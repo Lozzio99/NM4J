@@ -1,6 +1,6 @@
 package Ivp.Solvers.RungeKutta;
 
-import Ivp.Function;
+import functions.fYT;
 import Ivp.Solvers.Solver;
 
 public class Ralston_s2nd extends Solver {
@@ -12,7 +12,7 @@ public class Ralston_s2nd extends Solver {
         this.w = w + ((1/4.)*(k1 + 3*k2));
     }
 
-    public static double Ralston2ndOrderStep(Function f, double w, double h, double t)
+    public static double Ralston2ndOrderStep(fYT f, double w, double h, double t)
     {
         double k1 = h * f.f_y(t,w);
         //System.out.print("k1\t: "+ k1+"\t");

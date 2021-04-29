@@ -1,5 +1,7 @@
 package Roots;
 
+import functions.fX;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public abstract class Root
 {
 
     List<Double> p_stages;
-    Function f;
+    fX f;
     double epsilon;
 
     public Root(){
@@ -19,7 +21,7 @@ public abstract class Root
         return this;
     }
 
-    public Root setFunction(Function f){
+    public Root setFunction(fX f){
         this.f = f;
         return this;
     }

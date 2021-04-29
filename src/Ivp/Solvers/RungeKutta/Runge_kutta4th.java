@@ -1,6 +1,6 @@
 package Ivp.Solvers.RungeKutta;
 
-import Ivp.Function;
+import functions.fYT;
 import Ivp.Solvers.Solver;
 
 public class Runge_kutta4th extends Solver
@@ -18,7 +18,7 @@ public class Runge_kutta4th extends Solver
     }
 
 
-    public static double RungeKutta4thStep(Function f, double t , double w , double h)
+    public static double RungeKutta4thStep(fYT f, double t , double w , double h)
     {
         double k1 = h * f.f_y(t,w);
         double k2 = h * f.f_y(t + (h/2), w + (k1/2));

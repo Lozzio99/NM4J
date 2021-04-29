@@ -1,6 +1,6 @@
 package Ivp.Solvers;
 
-import Ivp.Function;
+import functions.fYT;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public abstract class Solver
 {
     protected double h;
     protected double tf;
-    protected Function f;
+    protected fYT f;
     protected double t;
 
     protected  int order = 0;
@@ -55,7 +55,7 @@ public abstract class Solver
      * @param f the function to analyse
      * @return the same solver
      */
-    public Solver setFunction(Function f){
+    public Solver setFunction(fYT f){
         this.f = f;
         return this;
     }

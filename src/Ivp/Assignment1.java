@@ -1,18 +1,18 @@
-import Ivp.Function;
+package Ivp;
+
 import Ivp.Solvers.Pred_Corr.Adam_Bashforth;
-import Ivp.Solvers.Pred_Corr.Adam_Moultoun;
-import Ivp.Solvers.RungeKutta.Ralston_s2nd;
 import Ivp.Solvers.RungeKutta.Runge_kutta4th;
 import Ivp.Solvers.Solver;
 import Error.Error;
-import Roots.Secant;
+import functions.fX;
+import functions.fYT;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Double.NaN;
 
-public class Main
+public class Assignment1
 {
 
 /*
@@ -22,7 +22,7 @@ public class Main
 assignment 1
 */
 
-    static Function f = (t, y) -> {
+    static fYT f = (t, y) -> {
         t = (float) t;
         return Math.sin(t) +y - Math.pow(y,3) ;
     };
@@ -46,9 +46,8 @@ assignment 1
     static double dt = 0.1;
     static double tf = 6;
 
-    public static void main(String[] args) {
-
-
+    public static void main(String[] args)
+    {
 
         /*
 
@@ -93,7 +92,6 @@ assignment 1
          EX assignment 1
 */
 
-
         Solver v = new Adam_Bashforth()
                 .setOrder(3)
                 .setInitialValue(initialValue)
@@ -105,6 +103,8 @@ assignment 1
 
 
         double w = v.getW();
+        System.out.println(" dt = "+ dt+ " t = 6");
+        System.out.println(w);
         System.out.print("abs error t6\t");
         System.out.println(Error.absoluteError(-0.659969302,w));
         System.out.print("rel error t6\t");
@@ -148,8 +148,6 @@ assignment 1
         double root = findSpecialRoot(f,5.2,5.25,w,w2);
         System.out.println("ROOT :: "+root);
         System.out.println( " 5.2 ->  +h = " + (root - 5.2 ) + "  == "+ root);
-
-
 
 
 
@@ -240,7 +238,7 @@ assignment 1
 
     }
 
-    private static void error(Roots.Function originalF, List<Double> w05, double exp1,double exp2)
+    private static void error(fX originalF, List<Double> w05, double exp1, double exp2)
     {
         System.out.println(w05 +" (first and last step) ");
         System.out.println(" expected -> "+ exp1);
@@ -253,7 +251,7 @@ assignment 1
 
 
 
-    public static double findSpecialRoot(Function f, double t1, double t2, double w1, double w2)
+    public static double findSpecialRoot(fYT f, double t1, double t2, double w1, double w2)
     {
         double root = NaN;
         double epsilon = 1e-200;

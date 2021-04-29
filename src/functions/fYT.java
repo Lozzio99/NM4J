@@ -1,6 +1,6 @@
-package Ivp;
+package functions;
 
-public interface Function
+public interface fYT
 {
     double f_y(double t,double y);
 

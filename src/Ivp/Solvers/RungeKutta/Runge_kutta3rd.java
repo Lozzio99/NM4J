@@ -1,6 +1,6 @@
 package Ivp.Solvers.RungeKutta;
 
-import Ivp.Function;
+import functions.fYT;
 import Ivp.Solvers.Solver;
 
 public class Runge_kutta3rd extends Solver
@@ -15,7 +15,7 @@ public class Runge_kutta3rd extends Solver
         this.w = w + ( k1 + (4*k2) + k3)/6.;
     }
 
-    public static double RungeKutta3rdStep(Function f, double w, double h, double t){
+    public static double RungeKutta3rdStep(fYT f, double w, double h, double t){
 
         System.out.print("\nRungeKutta 3rd order : ");
         System.out.println(" k1 = hf(t,w);  k2 = hf(t+ h/2, w+ k1/2);  k2 = hf(t+h, w-k1 + 2k2); ");

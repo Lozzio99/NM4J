@@ -1,9 +1,7 @@
 package Ivp.Solvers.Pred_Corr;
 
-import Ivp.Function;
-import Ivp.Solvers.RungeKutta.Ralston_s2nd;
+import functions.fYT;
 import Ivp.Solvers.RungeKutta.Runge_kutta3rd;
-import Ivp.Solvers.RungeKutta.Runge_kutta4th;
 import Ivp.Solvers.Solver;
 
 import java.util.ArrayList;
@@ -11,13 +9,13 @@ import java.util.List;
 
 import static java.lang.Double.NaN;
 
-public class Adam_Moultoun extends Solver
+public class Adam_Moulton extends Solver
 {
 
     public double w_1 = NaN, w1 = NaN , w2 = NaN;
     List<Double> w_t;
 
-    public Adam_Moultoun(){
+    public Adam_Moulton(){
         this.w_t = new ArrayList<>();
     }
     @Override
@@ -54,7 +52,7 @@ public class Adam_Moultoun extends Solver
         this.w_1 = this.w;
     }
 
-    public static double AdamMoultoun2ndStep (Function f, double  w1, double w,double w_1, double t,double h )
+    public static double AdamMoultoun2ndStep (fYT f, double  w1, double w, double w_1, double t, double h )
     {
         double ft1w1 = f.f_y(t+h, w1);
         //System.out.println(" f(t1,w1) : "+ ft1w1);

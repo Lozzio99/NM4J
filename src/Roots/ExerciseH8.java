@@ -1,9 +1,11 @@
 package Roots;
 
+import functions.fX;
+
 public class ExerciseH8
 {
     public static void main(String[] args) {
-        Function f = (x)-> x * x -5;
+        fX f = (x)-> x * x -5;
         test(f,2,3);
 
 
@@ -19,7 +21,7 @@ public class ExerciseH8
         test(f,0,1);
     }
 
-    public static void test(Function f, double p1, double p2){
+    public static void test(fX f, double p1, double p2){
         testBisection(f,p1,p2);
         System.out.println("--------------------------");
         testNewton(f,p1,p2);
@@ -28,7 +30,7 @@ public class ExerciseH8
         System.out.println("--------------------------");
     }
 
-    public static void testBisection(Function f, double p1, double p2){
+    public static void testBisection(fX f, double p1, double p2){
         Root b = new Bisection().setFunction(f).setEpsilon(0.1);
         b.findRoot(p1,p2);
         System.out.println("Bisection 10^-1");
@@ -39,7 +41,7 @@ public class ExerciseH8
         System.out.println(b.getP_stages());
     }
 
-    public static void testSecant(Function f, double p1, double p2){
+    public static void testSecant(fX f, double p1, double p2){
         Root s = new Secant().setFunction(f).setEpsilon(0.1);
         s.findRoot(p1,p2);
         System.out.println("Secant 10^-1");
@@ -50,7 +52,7 @@ public class ExerciseH8
         System.out.println(s.getP_stages());
     }
 
-    public static void testNewton(Function f, double p1, double p2){
+    public static void testNewton(fX f, double p1, double p2){
         Root n = new Newton().setFunction(f).setEpsilon(0.1);
         n.findRoot((p2-p1)/2);
         System.out.println("Newton 10^-1");

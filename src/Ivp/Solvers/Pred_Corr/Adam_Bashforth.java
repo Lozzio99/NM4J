@@ -1,6 +1,6 @@
 package Ivp.Solvers.Pred_Corr;
 
-import Ivp.Function;
+import functions.fYT;
 import Ivp.Solvers.RungeKutta.Ralston_s2nd;
 import Ivp.Solvers.RungeKutta.Runge_kutta3rd;
 import Ivp.Solvers.RungeKutta.Runge_kutta4th;
@@ -86,7 +86,7 @@ public class Adam_Bashforth extends Solver
 
     }
 
-    public static double AdamBashforth2ndStep(Function f, double w, double w_1, double t,double t_1, double h)
+    public static double AdamBashforth2ndStep(fYT f, double w, double w_1, double t, double t_1, double h)
     {
         System.out.print("\nPredictor : ");
         System.out.println ("§w (i+1) = w + 1/2 h  ( 3 f(t,w) - f(t-1,w-1) ))");
