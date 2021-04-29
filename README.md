@@ -5,21 +5,21 @@ Numerical Mathematics for Java
 Some of NM techniques - Ken1540 04/05 - 2021
 
 
-#<h style="color:#33ffcc">TOPICS:</h>
+<h style="color:#33ffcc">TOPICS:</h>
 
-##<h3 style="color:#ff0000">Roots</h3>
+<h3 style="color:#ff0000">Roots</h3>
 
 #### - Bisection
 #### - Newton
 #### - Secant
 
 
-##<h3 style="color:#ff0000">Errors</h3>
+<h3 style="color:#ff0000">Errors</h3>
 
 #### - Relative Err 
 #### - Absolute Err
 
-##<h3 style="color:#ff0000">Initial Value</h>
+<h3 style="color:#ff0000">Initial Value</h>
 <h3 style="color:#ff2299">Solvers </h3>
 
 #### - trapezoid 2nd
@@ -33,8 +33,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Bogacki Shampine adaptive method
 
 
-##<h3 style="color:#ff0000">Derivatives</h> -
-
+<h3 style="color:#ff0000">Derivatives</h> -
 <h3 style="color:#ff2299">First Derivative  </h3>
   #### - Three points forward
   #### - Three points Centred Difference
@@ -50,7 +49,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
   #### - Five points asymmetric
 
 
-##<h3 style="color:#ff0000">Integration </h>
+<h3 style="color:#ff0000">Integration </h>
 
 #### - Midpoint
 #### - trapezoid
