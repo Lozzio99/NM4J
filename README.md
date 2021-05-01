@@ -58,7 +58,12 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Adaptive trapezoid
 #### - Adaptive Simpsons
 
+<h3 style="color:#984EEC">Polynomials </h>
 
+#### - Lagrange
+#### - Divided Differences
+
+<h3 style="color:#984EEC">Plotting graphs </h>
 
 
 ... more is yet to come
