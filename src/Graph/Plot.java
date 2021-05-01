@@ -1,5 +1,6 @@
 package Graph;
 
+import Derivative.FirstDeriv.ThreePointForward;
 import functions.fX;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.*;
@@ -16,8 +18,10 @@ import static java.lang.Math.*;
 public class Plot extends Canvas
 {
     public static void main(String[] args) {
-        //Plot p1 = new Plot(Math::exp);
-        new Plot().evaluate((x)-> 80*sin(x*50));
+        Plot p = new Plot();
+        //new Plot().evaluate(Math::exp);
+        //new Plot().evaluate((x)-> 80*sin(x*50));
+        p.evaluate(-200,0,0,100,200,0);
     }
 
     private final JFrame frame;
@@ -32,7 +36,6 @@ public class Plot extends Canvas
 
     public Plot()
     {
-
         this.frame = new JFrame();
         this.frame.setSize(screen);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -54,8 +57,31 @@ public class Plot extends Canvas
 
     public Plot evaluate(fX f)
     {
+        calculated = false;
         this.f = f;
         this.evaluate();
+        return this;
+    }
+
+    /**
+     * Requires sorted pairs of x and y 's
+     */
+    public Plot evaluate(double... xy){
+        calculated = false;
+        if (xy.length %2 != 0)
+            throw new IllegalArgumentException("Please fill x,y - x,y - x,y...");
+        this.p1 = new Point[xy.length/2];
+        this.p2 = new Point[xy.length-this.p1.length];
+        int k = 0;
+        for (int i = 0; i< this.p1.length; i++) {
+            this.p1[i] = new Point(xy[k],xy[k+1]);
+            k+= 2;
+        }
+        for (int i = 0; k < this.p2.length; i++) {
+            this.p2[i] = new Point(xy[k],xy[k+1]);
+            k+= 2;
+        }
+        calculated = true;
         return this;
     }
 
@@ -92,7 +118,7 @@ public class Plot extends Canvas
     {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
-            this.createBufferStrategy(5);
+            this.createBufferStrategy(3);
             return;
         }
 
@@ -100,8 +126,7 @@ public class Plot extends Canvas
         Graphics2D g = (Graphics2D)graphics;
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, screen.width, screen.height);
-        if (calculated)
-            draw(g);
+        draw(g);
         g.dispose();
         bs.show();
     }
@@ -114,10 +139,16 @@ public class Plot extends Canvas
             g.draw(this.y);
         }
 
-        g.setColor(Color.BLACK);
-        for (int i = 0; i< this.p1.length-1; i++ ){
-            g.draw(new Line2D.Double(p1[i+1].x, p1[i+1].y, p1[i].x, p1[i].y));
-            g.draw(new Line2D.Double(p2[i+1].x, p2[i+1].y, p2[i].x, p2[i].y));
+        if (calculated) {
+            g.setColor(Color.BLACK);
+            for (int i = 0; i< this.p1.length-1; i++ ){
+                if (p1[i] == null || p1[i+1] == null)
+                    continue;
+                g.draw(new Line2D.Double(p1[i+1].x, p1[i+1].y, p1[i].x, p1[i].y));
+                if( p2[i+1] == null || p2[i] == null )
+                    continue;
+                g.draw(new Line2D.Double(p2[i+1].x, p2[i+1].y, p2[i].x, p2[i].y));
+            }
         }
     }
     static class Point
@@ -125,8 +156,11 @@ public class Plot extends Canvas
         double x, y;
         Point(double x, double y)
         {
-            this.x = ORIGIN.x  + x;
+            double f = screen.width;
+            this.x = (ORIGIN.x  + x);
+            this.x = Math.min(Math.max(this.x,0), f);
             this.y = ORIGIN.y  - y;
+            this.y = Math.min(Math.max(this.y,0),f);
         }
 
         Point(){
