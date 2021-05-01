@@ -26,6 +26,7 @@ public class Plot extends Canvas
     private final static Dimension screen = new Dimension(800,800);
     private static final Point ORIGIN = new Point();
     private List<Point> p;
+    private Line2D.Double x,y;
 
     public Plot(fX f)
     {
@@ -40,6 +41,8 @@ public class Plot extends Canvas
                 System.exit(0);
             }
         });
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setResizable(false);
         this.frame.add(this);
         this.frame.setVisible(true);
         this.evaluate();
@@ -48,6 +51,9 @@ public class Plot extends Canvas
 
     private void evaluate()
     {
+        Point px = new Point(-400,0),py = new Point(0,-400), px1 = new Point(400,0), py1 = new Point(0,400);
+        this.x = new Line2D.Double(px.x,px.y,px1.x,px1.y);
+        this.y = new Line2D.Double(py.x,py.y,py1.x,py1.y);
         this.p = new ArrayList<>();
         int x_ = screen.width/2;
         for (int i = -x_; i< x_; i++){
@@ -56,16 +62,15 @@ public class Plot extends Canvas
     }
 
     private void start() {
-        Timer t = new Timer(100,(e)->render());
+        Timer t = new Timer(100,(e) -> render());
         t.start();
     }
 
     private void render()
     {
         BufferStrategy bs = this.getBufferStrategy();
-        if (bs == null)
-        {
-            this.createBufferStrategy(3);
+        if (bs == null) {
+            this.createBufferStrategy(5);
             return;
         }
 
@@ -73,7 +78,6 @@ public class Plot extends Canvas
         Graphics2D g = (Graphics2D)graphics;
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, screen.width, screen.height);
-        g.setColor(Color.BLACK);
         draw(g);
         g.dispose();
         bs.show();
@@ -81,14 +85,20 @@ public class Plot extends Canvas
 
     private void draw(Graphics2D g)
     {
-        for (int i =0;i< this.p.size()-1; i++ ){
-            g.draw(new Line2D.Double(p.get(i+1).x,p.get(i+1).y,p.get(i).x,p.get(i).y));
+        g.setColor(Color.RED);
+        g.draw(this.x);
+        g.draw(this.y);
+
+        g.setColor(Color.BLACK);
+
+        for (int i =0;i< this.p.size()-2; i++ ){
+            g.draw(new Line2D.Double(p.get(i+2).x,p.get(i+2).y,p.get(i).x,p.get(i).y));
         }
     }
 
     public static void main(String[] args) {
         //Plot p = new Plot(Math::exp);
-        Plot p = new Plot((x)-> 25*sin(0.00101*pow(x,2)));
+        new Plot((x)-> 20 * sin(pow(x,-1)) * pow(cos(x),-2));
     }
 
 
