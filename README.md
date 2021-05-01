@@ -65,8 +65,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 <h3 style="color:#984EEC">Plotting graphs </h>
 
-`
-double [] xs = new double[]{ .. };`
+###### `double [] xs = new double[]{ .. };`
 
 `double [] ys = new double[]{ .. };`
 
