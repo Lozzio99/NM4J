@@ -65,6 +65,20 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 <h3 style="color:#984EEC">Plotting graphs </h>
 
+`
+double [] xs = new double[]{ .. };`
 
-... more is yet to come
+`double [] ys = new double[]{ .. };`
+
+`double [] y_s = new double[]{ .. };`
+
+`Plot p = new Plot();`
+
+`p.scale(80).translate(-200,0);`
+
+`p.plot(xs,ys); p.plot2(xs,y_s);`
+
+
+
+#### - _more stuff yet to come_
 
