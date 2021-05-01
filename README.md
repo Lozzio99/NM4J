@@ -33,6 +33,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 
 <h3 style="color:#984EEC">First Derivative  </h3>
+
 #### - Three points forward 
 #### - Three points Centred Difference
 #### - Five points Centred Difference
@@ -40,6 +41,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Five points asymmetric
 
 <h3 style="color:#984EEC">Second Derivative  </h3>
+
 #### - Three points Centred Difference
 #### - Three points forward
 #### - Five points Centred Difference
