@@ -1,16 +1,12 @@
-package Derivative.Graph;
+package Graph;
 
-import Derivative.FirstDeriv.ThreePointForward;
 import functions.fX;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +15,24 @@ import static java.lang.Math.*;
 
 public class Plot extends Canvas
 {
+    public static void main(String[] args) {
+        //Plot p1 = new Plot(Math::exp);
+        new Plot().evaluate((x)-> 80*sin(x*50));
+    }
 
     private final JFrame frame;
-    private final fX f;
+    private fX f;
     private WindowEvent listen;
-    private final static Dimension screen = new Dimension(800,800);
+    private final static Dimension screen = new Dimension(500,500);
     private static final Point ORIGIN = new Point();
-    private List<Point> p;
+    private Point[] p1,p2;
     private Line2D.Double x,y;
+    private boolean calculated = false, drawAxis = true;
 
-    public Plot(fX f)
+
+    public Plot()
     {
-        this.f = f;
+
         this.frame = new JFrame();
         this.frame.setSize(screen);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -45,23 +47,43 @@ public class Plot extends Canvas
         this.frame.setResizable(false);
         this.frame.add(this);
         this.frame.setVisible(true);
-        this.evaluate();
+        if (drawAxis)
+            this.axis();
         this.start();
     }
 
-    private void evaluate()
+    public Plot evaluate(fX f)
     {
+        this.f = f;
+        this.evaluate();
+        return this;
+    }
+
+    private void axis() {
         Point px = new Point(-400,0),py = new Point(0,-400), px1 = new Point(400,0), py1 = new Point(0,400);
         this.x = new Line2D.Double(px.x,px.y,px1.x,px1.y);
         this.y = new Line2D.Double(py.x,py.y,py1.x,py1.y);
-        this.p = new ArrayList<>();
-        int x_ = screen.width/2;
-        for (int i = -x_; i< x_; i++){
-            p.add(new Point(i,f.f_x(i)));
+    }
+    private void evaluate()
+    {
+
+        int x_ = screen.width*2;
+        this.p1 = new Point[x_];
+        this.p2 = new Point[x_];
+        double k = -x_/2.;
+        for (int i = 0; i< x_; i++) {
+            p1[i] = new Point(k,f.f_x(k));
+            k+= 0.5;
         }
+        for (int i = 0; i< x_; i++) {
+            p2[i] = new Point(k,f.f_x(k));
+            k+= 0.5;
+        }
+        calculated = true;
     }
 
-    private void start() {
+    private void start()
+    {
         Timer t = new Timer(100,(e) -> render());
         t.start();
     }
@@ -78,30 +100,26 @@ public class Plot extends Canvas
         Graphics2D g = (Graphics2D)graphics;
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, screen.width, screen.height);
-        draw(g);
+        if (calculated)
+            draw(g);
         g.dispose();
         bs.show();
     }
 
     private void draw(Graphics2D g)
     {
-        g.setColor(Color.RED);
-        g.draw(this.x);
-        g.draw(this.y);
+        if (drawAxis) {
+            g.setColor(Color.RED);
+            g.draw(this.x);
+            g.draw(this.y);
+        }
 
         g.setColor(Color.BLACK);
-
-        for (int i =0;i< this.p.size()-2; i++ ){
-            g.draw(new Line2D.Double(p.get(i+2).x,p.get(i+2).y,p.get(i).x,p.get(i).y));
+        for (int i = 0; i< this.p1.length-1; i++ ){
+            g.draw(new Line2D.Double(p1[i+1].x, p1[i+1].y, p1[i].x, p1[i].y));
+            g.draw(new Line2D.Double(p2[i+1].x, p2[i+1].y, p2[i].x, p2[i].y));
         }
     }
-
-    public static void main(String[] args) {
-        //Plot p = new Plot(Math::exp);
-        new Plot((x)-> 20 * sin(pow(x,-1)) * pow(cos(x),-2));
-    }
-
-
     static class Point
     {
         double x, y;
