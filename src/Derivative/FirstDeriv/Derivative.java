@@ -12,6 +12,9 @@ public class Derivative
     protected static double h;
     private dfdX de ;
 
+    protected double [] xs,ys;
+    protected double[] f1x,f2x;
+
     public Derivative(double dx){
         h = dx;
     }

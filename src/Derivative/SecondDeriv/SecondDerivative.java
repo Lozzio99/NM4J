@@ -35,4 +35,18 @@ public class SecondDerivative extends Derivative
         System.out.println(d.derive(2,f));
     }
 
+
+    public static double _3PForwardStep(double h, double fx, double fxh, double fx2h){
+        return (fx - (2*fxh) + fx2h)/ pow(h,2);
+    }
+
+    public static double _3PBackwardStep(double h, double f2hx, double fhx, double fx){
+        return (-fx + (2*fhx) - f2hx)/ pow(h,2);
+    }
+
+    public static double _3PCentredStep(double h, double fhx,double fx, double fxh){
+        return (fhx - (2*fx) +  fxh)/  pow(h,2);
+    }
+
+
 }
