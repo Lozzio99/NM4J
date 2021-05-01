@@ -19,9 +19,10 @@ public class Plot extends Canvas
 {
     public static void main(String[] args) {
         Plot p = new Plot();
+        p.scale(1);
         //new Plot().evaluate(Math::exp);
-        //new Plot().evaluate((x)-> 80*sin(x*50));
-        p.evaluate(-200,0,0,100,200,0);
+        p.evaluate((x)-> 80*sin(x*50));
+        //p.evaluate(-200,0,0,100,200,0);
     }
 
     private final JFrame frame;
@@ -31,7 +32,7 @@ public class Plot extends Canvas
     private static final Point ORIGIN = new Point();
     private Point[] p1,p2;
     private Line2D.Double x,y;
-    private boolean calculated = false, drawAxis = true;
+    private boolean calculated = false, drawAxis = true, plot2 = false;
 
 
     public Plot()
@@ -66,7 +67,8 @@ public class Plot extends Canvas
     /**
      * Requires sorted pairs of x and y 's
      */
-    public Plot evaluate(double... xy){
+    public Plot evaluate(double... xy)
+    {
         calculated = false;
         if (xy.length %2 != 0)
             throw new IllegalArgumentException("Please fill x,y - x,y - x,y...");
@@ -85,14 +87,71 @@ public class Plot extends Canvas
         return this;
     }
 
-    private void axis() {
+    public Plot plot(double[] xs, double[] ys)
+    {
+        calculated = false;
+        if (xs.length!= ys.length)
+            throw new IllegalArgumentException("x and y must have the same size");
+        if (xs.length>1000)
+            throw new UnsupportedOperationException("need to implement multiple points arrays");
+        double[]x,y;
+        x = Arrays.copyOf(xs,xs.length);
+        y = Arrays.copyOf(ys,ys.length);
+        sortingForDrawing(x,y);
+        this.p1 = new Point[xs.length];
+        for (int i = 0; i< this.p1.length; i++){
+            this.p1[i] = new Point(x[i],y[i]);
+        }
+        calculated = true;
+        return this;
+    }
+
+    public Plot plot2(double[]xs, double[] ys)
+    {
+        calculated = false;
+        plot2 = true;
+        double[]x,y;
+        x = Arrays.copyOf(xs,xs.length);
+        y = Arrays.copyOf(ys,ys.length);
+        sortingForDrawing(x,y);
+        this.p2 = new Point[xs.length];
+        for (int i = 0; i< this.p1.length; i++){
+            this.p2[i] = new Point(x[i],y[i]);
+        }
+        calculated = true;
+        return this;
+    }
+
+    /**
+     * sorts the arrays by reference
+     * @param xs the arrays which will give the sorting order
+     * @param ys the xs index - related values
+     */
+    public static void sortingForDrawing(double xs[], double []ys)
+    {
+        int n = xs.length;
+        for (int j = 1; j < n; j++) {
+            double key = xs[j],y_key = ys[j];
+            int i = j-1;
+            while ( (i > -1) && ( xs [i] > key ) ) {
+                xs [i+1] = xs [i];
+                ys [i+1] = ys [i];
+                i--;
+            }
+            xs[i+1] = key;
+            ys[i+1] = y_key;
+        }
+    }
+
+    private void axis()
+    {
         Point px = new Point(-400,0),py = new Point(0,-400), px1 = new Point(400,0), py1 = new Point(0,400);
-        this.x = new Line2D.Double(px.x,px.y,px1.x,px1.y);
-        this.y = new Line2D.Double(py.x,py.y,py1.x,py1.y);
+        this.x = new Line2D.Double(px.getX(),px.getY(),px1.getX(),px1.getY());
+        this.y = new Line2D.Double(py.getX(),py.getY(),py1.getX(),py1.getY());
     }
     private void evaluate()
     {
-
+        calculated = false;
         int x_ = screen.width*2;
         this.p1 = new Point[x_];
         this.p2 = new Point[x_];
@@ -114,6 +173,17 @@ public class Plot extends Canvas
         t.start();
     }
 
+    public void translate(double x, double y)
+    {
+        ORIGIN.xOff+= x;
+        ORIGIN.yOff+= y;
+        if (drawAxis)
+            this.axis();
+    }
+    public void scale(double scale)
+    {
+        Point.scale += scale ;
+    }
     private void render()
     {
         BufferStrategy bs = this.getBufferStrategy();
@@ -141,31 +211,51 @@ public class Plot extends Canvas
 
         if (calculated) {
             g.setColor(Color.BLACK);
-            for (int i = 0; i< this.p1.length-1; i++ ){
+            for (int i = 0; i< this.p1.length-1; i++ )
+            {
                 if (p1[i] == null || p1[i+1] == null)
                     continue;
-                g.draw(new Line2D.Double(p1[i+1].x, p1[i+1].y, p1[i].x, p1[i].y));
-                if( p2[i+1] == null || p2[i] == null )
+                g.draw(new Line2D.Double(p1[i+1].getX(), p1[i+1].getY(), p1[i].getX(), p1[i].getY()));
+            }
+
+            if (p2 == null)
+                return;
+            if (plot2)
+                g.setColor(Color.BLUE);
+            for (int i = 0; i< this.p2.length-1; i++ )
+            {
+                if (p2[i + 1] == null || p2[i] == null)
                     continue;
-                g.draw(new Line2D.Double(p2[i+1].x, p2[i+1].y, p2[i].x, p2[i].y));
+                g.draw(new Line2D.Double(p2[i + 1].getX(), p2[i + 1].getY(), p2[i].getX(), p2[i].getY()));
             }
         }
     }
     static class Point
     {
         double x, y;
+        static double scale = 1.05;
+        double xOff , yOff;
+
         Point(double x, double y)
         {
             double f = screen.width;
-            this.x = (ORIGIN.x  + x);
-            this.x = Math.min(Math.max(this.x,0), f);
-            this.y = ORIGIN.y  - y;
-            this.y = Math.min(Math.max(this.y,0),f);
+            this.x = ORIGIN.getX()  + (x * scale);
+            this.y = ORIGIN.getY()  - (y * scale);
         }
 
         Point(){
-            this.x = screen.width/2.;
-            this.y = screen.height/2.;
+            this.x = screen.width/2. + xOff;
+            this.y = screen.height/2. - yOff;
+        }
+
+        public double getX() {
+            double x =  (this.x + (xOff))  ;
+            return ((x > screen.width? screen.width: x)<0 ? 0 : x);
+        }
+
+        public double getY() {
+            double y = (this.y + (yOff))  ;
+            return ((y > screen.width? screen.width: y)<0 ? 0 : y);
         }
 
         @Override

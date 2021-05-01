@@ -1,4 +1,4 @@
-package Ivp;
+package Exercises;
 
 import Ivp.Solvers.Pred_Corr.Adam_Bashforth;
 import Ivp.Solvers.RungeKutta.Runge_kutta4th;

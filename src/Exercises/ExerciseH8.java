@@ -1,5 +1,9 @@
-package Roots;
+package Exercises;
 
+import Roots.Bisection;
+import Roots.Newton;
+import Roots.Root;
+import Roots.Secant;
 import functions.fX;
 
 public class ExerciseH8
