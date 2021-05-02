@@ -78,14 +78,24 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Adaptive trapezoid
 #### - Adaptive Simpsons
 
+
 <h3 style="color:#984EEC">Polynomials </h>
 
 #### - Lagrange
 #### - Divided Differences
+#### - Legendre Polynomial
+#### - Chebyshev nodes
+#### - Linear Least Squares
+#### - Quadratic Least Squares
 #### - Polynomial fitting for graphs
 
 
+<h3 style="color:#984EEC">Fourier </h>
+
+#### - Fourier approximation
+#### - Fourier Series
+#### - Discrete Fourier transform
 
 
-#### - _more stuff yet to come_
+##### - _more stuff yet to come_
 
