@@ -1,5 +1,3 @@
-`.res/`
-
 # <h style="color:#77FF33">Numerical Mathematics</h>
 Numerical Mathematics for Java
 
@@ -7,7 +5,7 @@ Numerical Mathematics for Java
 Some of NM techniques - Ken1540 04/05 - 2021
 
 
-<h style="color:#33ffcc">TOPICS:</h>
+##<h style="color:#33ffcc">TOPICS:</h>
 
 
 <h3 style="color:#984EEC">Plotting graphs </h>
