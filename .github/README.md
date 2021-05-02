@@ -11,7 +11,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 <h3 style="color:#984EEC">Plotting graphs </h>
 
 
-![What is this](ss1.jpg?raw=false "Plot")
+![What is this](ss2.jpg?raw=false "Plot")
 
 ###### 
 `double [] xs = new double[]{ .. };`
