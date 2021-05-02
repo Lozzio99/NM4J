@@ -1,3 +1,5 @@
+`.res/`
+
 # <h style="color:#77FF33">Numerical Mathematics</h>
 Numerical Mathematics for Java
 
