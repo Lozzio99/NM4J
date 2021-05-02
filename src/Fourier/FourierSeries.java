@@ -29,7 +29,7 @@ public class FourierSeries
 
 
     public static void main(String[] args) {
-        FourierSeries f = new FourierSeries(6),f2 = new FourierSeries(24);
+        FourierSeries f = new FourierSeries(6),f2 = new FourierSeries(104);
         double [] xs = Interpolation.linX(-5*PI,5*PI,300);
         double [] ys = new double [300],ys2 = new double[300];
         for (int i = 0; i< ys.length; i++)

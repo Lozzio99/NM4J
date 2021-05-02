@@ -41,7 +41,7 @@ public class SecondDerivative extends Derivative
     }
 
     public static double _3PBackwardStep(double h, double f2hx, double fhx, double fx){
-        return (-fx + (2*fhx) - f2hx)/ pow(h,2);
+        return (f2hx - 2*fhx + fx)/ pow(h,2);
     }
 
     public static double _3PCentredStep(double h, double fhx,double fx, double fxh){

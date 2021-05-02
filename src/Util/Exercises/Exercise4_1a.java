@@ -3,6 +3,7 @@ package Util.Exercises;
 import Derivative.FirstDeriv.ThreePointCentred;
 import Derivative.FirstDeriv.ThreePointForward;
 import Derivative.SecondDeriv.SecondDerivative;
+import Graph.Plot;
 
 import java.util.Arrays;
 
@@ -28,6 +29,12 @@ public class Exercise4_1a
         System.out.println(Arrays.toString(f1x));
         System.out.println("///---------------------------------------------////");
         System.out.println(Arrays.toString(f2x));
+        double [] xs = new double[]{x0,x1,x2,x3},fx = new double[]{f0,f1,f2,f3};
+        Plot p = new Plot();
+        p.scale(5);
+        p.translate(0,200);
+        p.plot(xs,fx);
+        p.plot2(xs,f1x);
 
     }
 }
