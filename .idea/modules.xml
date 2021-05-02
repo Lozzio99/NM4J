@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NumericalMath.iml" filepath="$PROJECT_DIR$/NumericalMath.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NM4J.iml" filepath="$PROJECT_DIR$/NM4J.iml" />
     </modules>
   </component>
 </project>
