@@ -3,6 +3,7 @@ package Exercises;
 import Graph.Plot;
 import Polynomials.DividedDifferences;
 
+
 public class Assignment2
 {
     public static void main(String[] args)

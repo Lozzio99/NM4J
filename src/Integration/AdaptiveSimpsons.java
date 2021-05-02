@@ -8,7 +8,7 @@ import static java.lang.Math.pow;
 
 public class AdaptiveSimpsons extends Simpsons{
 
-    double epsilon = 0.0001;
+    double epsilon = 0.01;
 
     public AdaptiveSimpsons(fX f, double ... xs) {
         super(f,xs);
@@ -16,7 +16,6 @@ public class AdaptiveSimpsons extends Simpsons{
 
     public double integrate(double a,double b){
         double t1 = step(a,b);
-        System.out.println(t1);
         double mid = (b+a)/2;
         double t2 = step(a,mid) + step(mid,b);
         if (abs(t2-t1)>((mid-a)/(b-a))*epsilon)

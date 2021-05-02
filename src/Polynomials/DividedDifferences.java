@@ -19,7 +19,7 @@ public class DividedDifferences
     public DividedDifferences(double... x_y)
     {
        if (x_y.length%2!=0)
-           throw new RuntimeException("fill in : x,y - x,y - ...");
+           throw new RuntimeException("fill in : xs,ys - xs,ys - ...");
        this.xs = new double[x_y.length/2];
        this.ys = new double[x_y.length/2];
        int k = 0;
@@ -50,9 +50,9 @@ public class DividedDifferences
     double px;
 
     /**
-     * @param xk the index of the x (in the given xs)
+     * @param xk the index of the xs (in the given xs)
      * @param i the starting point
-     * @return recursively the p(x)
+     * @return recursively the p(xs)
      */
     private double p(int xk, int i)
     {
@@ -65,10 +65,10 @@ public class DividedDifferences
     }
 
     /**
-     * evaluate at a given x value
-     * @param x_ the value x to evaluate
+     * evaluate at a given xs value
+     * @param x_ the value xs to evaluate
      * @param i the index of the starting point
-     * @return recursively the p(x)
+     * @return recursively the p(xs)
      */
     private double p(double x_, int i)
     {
@@ -82,8 +82,8 @@ public class DividedDifferences
 
     /**
      * @param xs the values on which to test the polynomial
-     * @param xk the index of the x to evaluate (from given xs)
-     * @return the polynomial evaluated at x
+     * @param xk the index of the xs to evaluate (from given xs)
+     * @return the polynomial evaluated at xs
      */
     private double p(double [] xs, int xk, int start)
     {
@@ -97,8 +97,8 @@ public class DividedDifferences
 
     /**
      * @param xs the values on which to test the polynomial
-     * @param x_ the value of the x to evaluate (from non - given xs too)
-     * @return the polynomial evaluated at x
+     * @param x_ the value of the xs to evaluate (from non - given xs too)
+     * @return the polynomial evaluated at xs
      */
     private double p(double []xs, double x_,int start){
         if (start == 0)

@@ -5,20 +5,23 @@ import functions.fX;
 
 import static java.lang.Math.pow;
 
-public class Simpsons
+public class Simpsons extends Integrator
 {
     Lagrange l;
-    double xs[];
-    fX f;
 
     public Simpsons(Lagrange g)
     {
+        super((x)->x);
         this.l = g;
     }
 
     public Simpsons (fX f, double ... x){
-        this.f = f;
-        this.xs = x;
+        super(f,x);
+    }
+
+    @Override
+    double integrate(int a, int b) {
+        return 0;
     }
 
     public double step(double a,double b)
@@ -43,10 +46,10 @@ public class Simpsons
     }
 
 
-    public double threeEightStep(double a, double b){
+    public double threeEightStep(double a, double b)
+    {
         double h =(b-a)/(xs.length-1);
         h *= 3/8.;
-
         double sum = f.f_x(xs[0]);
         for (int i = 1;i< xs.length-1; i++)
         {

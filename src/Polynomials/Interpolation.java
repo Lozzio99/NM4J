@@ -23,6 +23,15 @@ public abstract class Interpolation {
         return y;
     }
 
+    public static double [] linX(double a,double b,int n){
+        double[] xs = new double[n];
+        double h = (b-a)/n;
+        for (int i = 0; i< n; i++) {
+            xs[i] = a+=h;
+        }
+        return xs;
+    }
+
     public abstract double polynomial(double x);
 
     public double[] getXs() {

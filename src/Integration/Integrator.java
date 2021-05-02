@@ -12,4 +12,8 @@ public abstract class Integrator
         this.xs = xs;
     }
     abstract double integrate(int a,int b);
+
+    public void setF(fX f) {
+        this.f = f;
+    }
 }

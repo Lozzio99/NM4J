@@ -251,28 +251,33 @@ public class Plot extends Canvas
         }
 
         if (calculated) {
-            g.setStroke(new BasicStroke(1.5f));
-
-            g.setColor(new Color(255, 151, 22, 255));
+            g.setStroke(new BasicStroke(0.3f));
+            g.setColor(new Color(0, 102, 255, 119));
+            g.drawString("p1",10,13);
             for (int i = 0; i< this.p1.length-1; i++ )
             {
                 if (p1[i] == null || p1[i+1] == null)
                     continue;
                 g.draw(new Line2D.Double(p1[i+1].getX(), p1[i+1].getY(), p1[i].getX(), p1[i].getY()));
             }
-            g.setStroke(new BasicStroke(2.0f));
+
 
             if (p2 == null)
                 return;
             if (plot2)
-                g.setColor(new Color(79, 88, 255, 235));
-            for (int i = 0; i< this.p2.length-1; i++ )
             {
-                if (p2[i + 1] == null || p2[i] == null)
-                    continue;
-                g.draw(new Line2D.Double(p2[i + 1].getX(), p2[i + 1].getY(), p2[i].getX(), p2[i].getY()));
+                g.setColor(new Color(85, 255, 79, 91));
+                g.drawString("p2",10,25);
+                g.setStroke(new BasicStroke(1.0f));
+                for (int i = 0; i< this.p2.length-1; i++ )
+                {
+                    if (p2[i + 1] == null || p2[i] == null)
+                        continue;
+                    g.draw(new Line2D.Double(p2[i + 1].getX(), p2[i + 1].getY(), p2[i].getX(), p2[i].getY()));
+                }
             }
         }
+
     }
     static class Point
     {
