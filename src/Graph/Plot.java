@@ -31,7 +31,7 @@ public class Plot extends Canvas
     private Point[] p1,p2;
     private Line2D.Double x,y;
     private boolean calculated = false, drawAxis = true, plot2 = false;
-    private static int FIT = 1,sz = 40;
+    private static int FIT = 1,sz = 400;
     public static final int NEWTON_NESTED = 1;
 
 

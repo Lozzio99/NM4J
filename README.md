@@ -7,6 +7,26 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 <h style="color:#33ffcc">TOPICS:</h>
 
+
+<h3 style="color:#984EEC">Plotting graphs </h>
+
+
+![Alt text](res\ss1.jpg?raw=true "Plot")
+
+###### 
+`double [] xs = new double[]{ .. };`
+
+`double [] ys = new double[]{ .. };`
+
+`Plot p = new Plot();`
+
+`p.scale(80).translate(-200,0);`
+
+`p.fit(xs,ys); p.plot2(xs,ys);`
+
+
+
+
 <h3 style="color:#984EEC">Roots</h3>
 
 #### - Bisection
@@ -62,21 +82,8 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 #### - Lagrange
 #### - Divided Differences
+#### - Polynomial fitting for graphs
 
-<h3 style="color:#984EEC">Plotting graphs </h>
-
-###### 
-`double [] xs = new double[]{ .. };`
-
-`double [] ys = new double[]{ .. };`
-
-`double [] y_s = new double[]{ .. };`
-
-`Plot p = new Plot();`
-
-`p.scale(80).translate(-200,0);`
-
-`p.plot(xs,ys); p.plot2(xs,y_s);`
 
 
 
