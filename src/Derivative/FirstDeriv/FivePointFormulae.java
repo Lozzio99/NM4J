@@ -1,6 +1,6 @@
 package Derivative.FirstDeriv;
 
-import functions.dfdX;
+import Util.functions.dfdX;
 
 public class FivePointFormulae extends Derivative {
     private static dfdX FPForward = (x, f) -> ((-25 * f.f_x(x)) + (48 * f.f_x(x + h)) - (36 * f.f_x(x + (2 * h))) + (16 * f.f_x(x + (3 * h))) - (3 * f.f_x(x + (4 * h)))) / (12 * h);

@@ -1,11 +1,7 @@
 package Fourier;
 
 import Integration.AdaptiveSimpsons;
-import Integration.AdaptiveTrapezoid;
-import Polynomials.Interpolation;
-import functions.fX;
-
-import java.util.Arrays;
+import Util.functions.fX;
 
 import static java.lang.Math.*;
 

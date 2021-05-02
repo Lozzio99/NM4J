@@ -1,4 +1,4 @@
-package Error;
+package Util.Error;
 
 public class Error
 {

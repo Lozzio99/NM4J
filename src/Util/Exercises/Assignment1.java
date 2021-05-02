@@ -1,11 +1,11 @@
-package Exercises;
+package Util.Exercises;
 
-import Ivp.Solvers.Pred_Corr.Adam_Bashforth;
-import Ivp.Solvers.RungeKutta.Runge_kutta4th;
-import Ivp.Solvers.Solver;
-import Error.Error;
-import functions.fX;
-import functions.fYT;
+import Solvers.Pred_Corr.Adam_Bashforth;
+import Solvers.RungeKutta.Runge_kutta4th;
+import Solvers.Solver;
+import Util.Error.Error;
+import Util.functions.fX;
+import Util.functions.fYT;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,6 @@
 package Polynomials;
 
-import functions.fX;
-
-import java.util.Arrays;
+import Util.functions.fX;
 
 public class SimpleLagrange
 {

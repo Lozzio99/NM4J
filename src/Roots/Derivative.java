@@ -1,6 +1,6 @@
 package Roots;
 
-import functions.fX;
+import Util.functions.fX;
 
 public class Derivative
 {

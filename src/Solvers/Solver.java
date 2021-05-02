@@ -1,6 +1,6 @@
-package Ivp.Solvers;
+package Solvers;
 
-import functions.fYT;
+import Util.functions.fYT;
 
 import java.util.List;
 

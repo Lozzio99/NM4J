@@ -1,10 +1,10 @@
-package Ivp.Solvers.Pred_Corr;
+package Solvers.Pred_Corr;
 
-import functions.fYT;
-import Ivp.Solvers.RungeKutta.Ralston_s2nd;
-import Ivp.Solvers.RungeKutta.Runge_kutta3rd;
-import Ivp.Solvers.RungeKutta.Runge_kutta4th;
-import Ivp.Solvers.Solver;
+import Util.functions.fYT;
+import Solvers.RungeKutta.Ralston_s2nd;
+import Solvers.RungeKutta.Runge_kutta3rd;
+import Solvers.RungeKutta.Runge_kutta4th;
+import Solvers.Solver;
 
 import static java.lang.Double.NaN;
 

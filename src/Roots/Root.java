@@ -1,6 +1,6 @@
 package Roots;
 
-import functions.fX;
+import Util.functions.fX;
 
 import java.util.ArrayList;
 import java.util.List;

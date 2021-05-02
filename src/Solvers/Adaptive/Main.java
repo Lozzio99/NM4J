@@ -1,8 +1,8 @@
-package Ivp.Solvers.Adaptive;
+package Solvers.Adaptive;
 
-import functions.fYT;
-import Ivp.Solvers.RungeKutta.Runge_kutta4th;
-import Ivp.Solvers.Solver;
+import Util.functions.fYT;
+import Solvers.RungeKutta.Runge_kutta4th;
+import Solvers.Solver;
 
 public class Main
 {

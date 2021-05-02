@@ -1,7 +1,7 @@
 package Graph;
 
 import Polynomials.DividedDifferences;
-import functions.fX;
+import Util.functions.fX;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package Exercises;
+package Util.Exercises;
 
 import Derivative.FirstDeriv.ThreePointCentred;
 import Derivative.FirstDeriv.ThreePointForward;

@@ -1,8 +1,6 @@
 package Fourier;
 
-import functions.fX;
-
-import java.util.Arrays;
+import Util.functions.fX;
 
 import static java.lang.Math.*;
 

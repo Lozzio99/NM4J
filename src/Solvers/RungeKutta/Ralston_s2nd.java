@@ -1,7 +1,7 @@
-package Ivp.Solvers.RungeKutta;
+package Solvers.RungeKutta;
 
-import functions.fYT;
-import Ivp.Solvers.Solver;
+import Util.functions.fYT;
+import Solvers.Solver;
 
 public class Ralston_s2nd extends Solver {
     @Override

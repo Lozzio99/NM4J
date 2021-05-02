@@ -1,7 +1,7 @@
 package Polynomials;
 
 import Graph.Plot;
-import functions.fX;
+import Util.functions.fX;
 
 
 // TODO: 02/05/2021 Find coefficients by fx

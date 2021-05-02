@@ -1,8 +1,8 @@
-package Ivp.Solvers.Pred_Corr;
+package Solvers.Pred_Corr;
 
-import functions.fYT;
-import Ivp.Solvers.RungeKutta.Runge_kutta3rd;
-import Ivp.Solvers.Solver;
+import Util.functions.fYT;
+import Solvers.RungeKutta.Runge_kutta3rd;
+import Solvers.Solver;
 
 import java.util.ArrayList;
 import java.util.List;

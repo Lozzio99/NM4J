@@ -1,6 +1,6 @@
-package Ivp.Solvers.Adaptive;
+package Solvers.Adaptive;
 
-import Ivp.Solvers.Solver;
+import Solvers.Solver;
 
 public class Bogacki_Shampine extends Solver
 {

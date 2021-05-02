@@ -1,11 +1,8 @@
 package Polynomials;
 
 import Graph.Plot;
-import functions.Matrix;
-import functions.fX;
-
-import java.rmi.MarshalException;
-import java.util.Arrays;
+import Util.Matrix;
+import Util.functions.fX;
 
 import static java.lang.Math.pow;
 

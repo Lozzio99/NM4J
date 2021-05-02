@@ -1,4 +1,4 @@
-package Exercises;
+package Util.Exercises;
 
 import Graph.Plot;
 import Polynomials.DividedDifferences;

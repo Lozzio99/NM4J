@@ -2,7 +2,7 @@ package Fourier;
 
 import Graph.Plot;
 import Polynomials.Interpolation;
-import functions.fX;
+import Util.functions.fX;
 
 import static java.lang.Math.*;
 

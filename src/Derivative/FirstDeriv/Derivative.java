@@ -1,7 +1,7 @@
 package Derivative.FirstDeriv;
 
-import functions.dfdX;
-import functions.fX;
+import Util.functions.dfdX;
+import Util.functions.fX;
 
 import static java.lang.Math.pow;
 

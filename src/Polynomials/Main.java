@@ -1,7 +1,7 @@
 package Polynomials;
 
 import Integration.Simpsons;
-import functions.fX;
+import Util.functions.fX;
 
 import java.util.Arrays;
 

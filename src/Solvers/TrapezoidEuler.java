@@ -1,4 +1,4 @@
-package Ivp.Solvers;
+package Solvers;
 
 public class TrapezoidEuler extends Solver {
 

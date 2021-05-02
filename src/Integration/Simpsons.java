@@ -1,7 +1,7 @@
 package Integration;
 
 import Polynomials.Lagrange;
-import functions.fX;
+import Util.functions.fX;
 
 import static java.lang.Math.pow;
 

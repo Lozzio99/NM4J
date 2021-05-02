@@ -2,12 +2,6 @@ package Roots;
 
 
 
-import Ivp.Solvers.RungeKutta.Ralston_s2nd;
-import Ivp.Solvers.RungeKutta.Runge_kutta4th;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static java.lang.Double.NaN;
 
 public class Secant extends Root

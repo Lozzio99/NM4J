@@ -1,6 +1,6 @@
 package Polynomials;
 
-import functions.fX;
+import Util.functions.fX;
 
 public abstract class Interpolation {
 

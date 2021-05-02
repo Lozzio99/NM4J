@@ -1,5 +1,5 @@
 package Integration;
-import functions.fX;
+import Util.functions.fX;
 
 public class Trapezoid extends Integrator
 {

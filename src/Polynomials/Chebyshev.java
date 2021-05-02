@@ -1,6 +1,6 @@
 package Polynomials;
 
-import functions.fX;
+import Util.functions.fX;
 
 import java.util.Arrays;
 
