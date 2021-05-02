@@ -1,6 +1,6 @@
 package Graph;
 
-import Derivative.FirstDeriv.ThreePointForward;
+import Polynomials.DividedDifferences;
 import functions.fX;
 
 import javax.swing.*;
@@ -9,9 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.Math.*;
 
@@ -21,7 +19,7 @@ public class Plot extends Canvas
         Plot p = new Plot();
         p.scale(1);
         //new Plot().evaluate(Math::exp);
-        p.evaluate((x)-> 80*sin(x*50));
+        p.plot((x)-> 80*sin(x*50));
         //p.evaluate(-200,0,0,100,200,0);
     }
 
@@ -33,6 +31,8 @@ public class Plot extends Canvas
     private Point[] p1,p2;
     private Line2D.Double x,y;
     private boolean calculated = false, drawAxis = true, plot2 = false;
+    private static int FIT = 1,sz = 40;
+    public static final int NEWTON_NESTED = 1;
 
 
     public Plot()
@@ -55,19 +55,23 @@ public class Plot extends Canvas
             this.axis();
         this.start();
     }
+    public Plot setFit(int fit){
+        FIT = fit;
+        return this;
+    }
 
-    public Plot evaluate(fX f)
+    public Plot plot(fX f)
     {
         calculated = false;
         this.f = f;
-        this.evaluate();
+        this.plot();
         return this;
     }
 
     /**
      * Requires sorted pairs of x and y 's
      */
-    public Plot evaluate(double... xy)
+    public Plot plot(double... xy)
     {
         calculated = false;
         if (xy.length %2 != 0)
@@ -106,6 +110,27 @@ public class Plot extends Canvas
         return this;
     }
 
+    public Plot fit(double []xs, double [] ys){
+        switch (FIT){
+            case NEWTON_NESTED -> {
+                DividedDifferences d = new DividedDifferences(xs,ys);
+                double [] x1 = Arrays.copyOf(xs,xs.length);
+                sort(x1);
+                double [] x2 = new double [sz], y2 ;
+                double h = (x1[x1.length-1]- x1[0])/sz, xl = x1[0];
+                int k = 0;
+                while(k<x2.length)
+                {
+                    x2[k++] = xl;
+                    xl+= h;
+                }
+                y2 = d.fx(x2);
+                return plot(x2,y2);
+            }
+        }
+        return plot(xs,ys);
+    }
+
     public Plot plot2(double[]xs, double[] ys)
     {
         calculated = false;
@@ -142,6 +167,19 @@ public class Plot extends Canvas
             ys[i+1] = y_key;
         }
     }
+    public static void sort(double xs[])
+    {
+        int n = xs.length;
+        for (int j = 1; j < n; j++) {
+            double key = xs[j];
+            int i = j-1;
+            while ( (i > -1) && ( xs [i] > key ) ) {
+                xs [i+1] = xs [i];
+                i--;
+            }
+            xs[i+1] = key;
+        }
+    }
 
     private void axis()
     {
@@ -149,7 +187,7 @@ public class Plot extends Canvas
         this.x = new Line2D.Double(px.getX(),px.getY(),px1.getX(),px1.getY());
         this.y = new Line2D.Double(py.getX(),py.getY(),py1.getX(),py1.getY());
     }
-    private void evaluate()
+    private void plot()
     {
         calculated = false;
         int x_ = screen.width*2;
