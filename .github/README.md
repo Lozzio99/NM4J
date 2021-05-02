@@ -7,7 +7,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 ## <h style="color:#33ffcc">TOPICS:</h>
 
 
-<h3 style="color:#984EEC">Plotting graphs </h>
+<h3 style="color:#984EEC">[Plotting graphs](src/Graph/Plot.java) </h>
 
 
 ![What is this](ss2.jpg?raw=false "Plot")
