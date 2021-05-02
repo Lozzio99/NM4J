@@ -120,7 +120,7 @@ public class DividedDifferences
             this.getTable();
         double[] fx = new double [xs.length];
         for (int i = 0; i< xs.length; i++){
-            fx[i] = p(xs,xs[i],0);
+            fx[i] = p(xs[i],0);
         }
         return fx;
     }
@@ -162,6 +162,8 @@ public class DividedDifferences
         System.out.println(px);
         System.out.println(Arrays.toString(d.fx()));
         System.out.println(Arrays.toString(d.fx(d.xs)));
+
+        System.out.println(Arrays.toString(d.fx(new double[]{-4,-3,-2,-1,0,1})));
        // new DividedDifferences(2.5,0.68,2.0,0.66,3.0,0.9,1.5,0.79,3.5,1.31,1,1.02,4.0,1.77,0.5,1.3,4.5,1.87,0,1.5,5,1.33).printTable();
 
     }

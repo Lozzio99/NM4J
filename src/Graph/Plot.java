@@ -47,6 +47,8 @@ public class Plot extends Canvas
                 System.exit(0);
             }
         });
+        ImageIcon img = new ImageIcon(this.getClass().getClassLoader().getResource("death.png").getFile());
+        this.frame.setIconImage(img.getImage());
         this.frame.setLocationRelativeTo(null);
         this.frame.setResizable(false);
         this.frame.add(this);
@@ -110,11 +112,12 @@ public class Plot extends Canvas
         return this;
     }
 
-    public Plot fit(double []xs, double [] ys){
+    public Plot fit(double []xs, double [] ys)
+    {
         switch (FIT){
             case NEWTON_NESTED -> {
                 DividedDifferences d = new DividedDifferences(xs,ys);
-                double [] x1 = Arrays.copyOf(xs,xs.length);
+                double [] x1 =Arrays.copyOf(xs,xs.length);
                 sort(x1);
                 double [] x2 = new double [sz], y2 ;
                 double h = (x1[x1.length-1]- x1[0])/sz, xl = x1[0];
@@ -140,7 +143,7 @@ public class Plot extends Canvas
         y = Arrays.copyOf(ys,ys.length);
         sortingForDrawing(x,y);
         this.p2 = new Point[xs.length];
-        for (int i = 0; i< this.p1.length; i++){
+        for (int i = 0; i< this.p2.length; i++){
             this.p2[i] = new Point(x[i],y[i]);
         }
         calculated = true;
@@ -232,8 +235,8 @@ public class Plot extends Canvas
 
         Graphics graphics = bs.getDrawGraphics();
         Graphics2D g = (Graphics2D)graphics;
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, screen.width, screen.height);
+        g.setColor(new Color(76, 76, 76, 190));
+        g.fill3DRect(0, 0, screen.width, screen.height,true);
         draw(g);
         g.dispose();
         bs.show();
@@ -242,24 +245,27 @@ public class Plot extends Canvas
     private void draw(Graphics2D g)
     {
         if (drawAxis) {
-            g.setColor(Color.RED);
+            g.setColor(new Color(255,0,0, 156));
             g.draw(this.x);
             g.draw(this.y);
         }
 
         if (calculated) {
-            g.setColor(Color.BLACK);
+            g.setStroke(new BasicStroke(1.5f));
+
+            g.setColor(new Color(255, 151, 22, 255));
             for (int i = 0; i< this.p1.length-1; i++ )
             {
                 if (p1[i] == null || p1[i+1] == null)
                     continue;
                 g.draw(new Line2D.Double(p1[i+1].getX(), p1[i+1].getY(), p1[i].getX(), p1[i].getY()));
             }
+            g.setStroke(new BasicStroke(2.0f));
 
             if (p2 == null)
                 return;
             if (plot2)
-                g.setColor(Color.BLUE);
+                g.setColor(new Color(79, 88, 255, 235));
             for (int i = 0; i< this.p2.length-1; i++ )
             {
                 if (p2[i + 1] == null || p2[i] == null)
