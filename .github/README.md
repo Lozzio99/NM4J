@@ -26,7 +26,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 
 
 
-<h3 style="color:#984EEC">Roots</h3>
+<h3 style="color:#984EEC">NM.Roots</h3>
 
 #### - Bisection
 #### - Newton
@@ -38,7 +38,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Relative Err 
 #### - Absolute Err
 
-<h3 style="color:#984EEC">Solvers </h3>
+<h3 style="color:#984EEC">NM.Solvers </h3>
 
 #### - trapezoid 2nd
 #### - midpoint 2nd
@@ -51,7 +51,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Bogacki Shampine adaptive method
 
 
-<h3 style="color:#984EEC">First Derivative  </h3>
+<h3 style="color:#984EEC">First NM.Derivative  </h3>
 
 #### - Three points forward 
 #### - Three points Centred Difference
@@ -59,7 +59,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Five points forward
 #### - Five points asymmetric
 
-<h3 style="color:#984EEC">Second Derivative  </h3>
+<h3 style="color:#984EEC">Second NM.Derivative  </h3>
 
 #### - Three points Centred Difference
 #### - Three points forward
@@ -68,7 +68,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Five points asymmetric
 
 
-<h3 style="color:#984EEC">Integration </h>
+<h3 style="color:#984EEC">NM.Integration </h>
 
 #### - Midpoint
 #### - trapezoid
@@ -78,7 +78,7 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Adaptive Simpsons
 
 
-<h3 style="color:#984EEC">Polynomials </h>
+<h3 style="color:#984EEC">NM.Polynomials </h>
 
 #### - Lagrange
 #### - Divided Differences
@@ -89,11 +89,11 @@ Some of NM techniques - Ken1540 04/05 - 2021
 #### - Polynomial fitting for graphs
 
 
-<h3 style="color:#984EEC">Fourier </h>
+<h3 style="color:#984EEC">NM.Fourier </h>
 
-#### - Fourier approximation
-#### - Fourier Series
-#### - Discrete Fourier transform
+#### - NM.Fourier approximation
+#### - NM.Fourier Series
+#### - Discrete NM.Fourier transform
 
 
 ##### - _more stuff yet to come_
