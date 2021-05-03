@@ -71,11 +71,11 @@ public class Legendre
         Legendre l = new Legendre(f,-1,1);
         System.out.println(l.g(0.6));
 
-        //double []x = Interpolation.linX(-1,1,200),y = l.g(x);
+        double []x = Interpolation.linX(-1,1,200),y = l.g(x);
 
-        //Plot p = new Plot();
-        //p.scale(140);
-        //p.plot(x,y);
+        Plot p = new Plot();
+        p.scale(140);
+        p.plot(x,y);
 
     }
 
