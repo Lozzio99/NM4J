@@ -26,8 +26,8 @@ public class Plot extends Canvas
     private final JFrame frame;
     private fX f;
     private WindowEvent listen;
-    private final static Dimension screen = new Dimension(500,500);
-    private static final Point ORIGIN = new Point();
+    final static Dimension screen = new Dimension(500,500);
+    static Point ORIGIN ;
     private Point[] p1,p2;
     private Line2D.Double x,y;
     private boolean calculated = false, drawAxis = true, plot2 = false;
@@ -53,6 +53,8 @@ public class Plot extends Canvas
         this.frame.setResizable(false);
         this.frame.add(this);
         this.frame.setVisible(true);
+        Point.setScreen(screen);
+        ORIGIN = new Point();
         if (drawAxis)
             this.axis();
         this.start();
@@ -71,13 +73,13 @@ public class Plot extends Canvas
     }
 
     /**
-     * Requires sorted pairs of x and y 's
+     * Requires sorted pairs of drawX and drawY 's
      */
     public Plot plot(double... xy)
     {
         calculated = false;
         if (xy.length %2 != 0)
-            throw new IllegalArgumentException("Please fill x,y - x,y - x,y...");
+            throw new IllegalArgumentException("Please fill drawX,drawY - drawX,drawY - drawX,drawY...");
         this.p1 = new Point[xy.length/2];
         this.p2 = new Point[xy.length-this.p1.length];
         int k = 0;
@@ -97,7 +99,7 @@ public class Plot extends Canvas
     {
         calculated = false;
         if (xs.length!= ys.length)
-            throw new IllegalArgumentException("x and y must have the same size");
+            throw new IllegalArgumentException("drawX and drawY must have the same size");
         if (xs.length>1000)
             throw new UnsupportedOperationException("need to implement multiple points arrays");
         double[]x,y;
@@ -279,41 +281,4 @@ public class Plot extends Canvas
         }
 
     }
-    static class Point
-    {
-        double x, y;
-        static double scale = 1.05;
-        double xOff , yOff;
-
-        Point(double x, double y)
-        {
-            double f = screen.width;
-            this.x = ORIGIN.getX()  + (x * scale);
-            this.y = ORIGIN.getY()  - (y * scale);
-        }
-
-        Point(){
-            this.x = screen.width/2. + xOff;
-            this.y = screen.height/2. - yOff;
-        }
-
-        public double getX() {
-            double x =  (this.x + (xOff))  ;
-            return ((x > screen.width? screen.width: x)<0 ? 0 : x);
-        }
-
-        public double getY() {
-            double y = (this.y + (yOff))  ;
-            return ((y > screen.width? screen.width: y)<0 ? 0 : y);
-        }
-
-        @Override
-        public String toString() {
-            return "{" +
-                    "x=" + x +
-                    ",y=" + y +
-                    '}';
-        }
-    }
-
 }
