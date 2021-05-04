@@ -16,6 +16,7 @@ public class DividedDifferences
         this.xs = xs;
         this.ys = ys;
     }
+
     public DividedDifferences(double... x_y)
     {
        if (x_y.length%2!=0)

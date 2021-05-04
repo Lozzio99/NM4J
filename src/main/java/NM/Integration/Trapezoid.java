@@ -4,33 +4,45 @@ import NM.Util.functions.fX;
 public class Trapezoid extends Integrator
 {
     public Trapezoid(int nodes, fX f, double ... xs){
-        super(f,xs);
-        this.nodes = xs.length-1;
+        super(nodes,f,xs);
     }
 
     public Trapezoid(fX f, double... xs){
-        super(f,xs);
-        nodes = xs.length-1;
+        super(xs.length-1,f,xs);
     }
 
-    @Override
-    public double integrate(int a, int b)
+    public Trapezoid( int nodes, fX f , double a , double b)
     {
-       return 0;
+        super(nodes,f,a,b);
     }
 
-    public double integrate() {
-        double integral = 0;
-        for (int i = 0; i< nodes; i++) {
-            integral+= step(xs[i],xs[i+1]);
-            System.out.println(xs[i] + " - > " + f.f_x(xs[i]));
+
+    /**
+     *  Composite rule,
+     *  * equally spaced nodes,
+     *  Tn[a,b] =  h ( (fx0/2) +  fx1 +  fx2 +  fx3 +  fx4 +  fx5  +  (fx6/2))
+     */
+    @Override
+    public double nRule(double a, double b) {
+        double sum = f(xs[0])/2 + f(xs[xs.length-1])/2; // f0,fn
+        if (DEBUG)
+            System.out.println(xs[0] + " -> "+ f(xs[0]));
+        for (int i = 1; i< xs.length-1; i++)
+        {
+            if (DEBUG)
+                System.out.println(xs[i] + " -> "+ f(xs[i]));
+            sum+=f(xs[i]);
         }
-        System.out.println(xs[xs.length-1] + " - > " + f.f_x(xs[xs.length-1]));
-
-        return integral;
+        if (DEBUG)
+            System.out.println(xs[xs.length-1] + " -> "+ f(xs[xs.length-1]));
+        return sum*((b-a)/nodes);  // /h
     }
 
-    public double step(double a, double b){
+
+    public double step(double a, double b)
+    {
         return (b-a) * ((f.f_x(a) + f.f_x(b))/2);
     }
+
+
 }

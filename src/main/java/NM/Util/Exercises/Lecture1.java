@@ -3,7 +3,6 @@ package NM.Util.Exercises;
 import NM.Integration.Midpoint;
 import NM.Integration.Simpsons;
 import NM.Integration.Trapezoid;
-import NM.Polynomials.Lagrange;
 import NM.Util.functions.fX;
 
 import static java.lang.Math.log;

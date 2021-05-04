@@ -4,6 +4,11 @@ import NM.Graph.Plot;
 import NM.Integration.AdaptiveSimpsons;
 import NM.Util.functions.fX;
 
+
+import java.lang.annotation.Target;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Legendre
 {
     private fX[] p;
@@ -13,7 +18,7 @@ public class Legendre
     private double a,b;
     private AdaptiveSimpsons integrator ;
 
-    public Legendre(fX f, double a, double b)
+    public Legendre( fX f, double a, double b)
     {
         this.f = f;
         this.a = a;
@@ -22,7 +27,6 @@ public class Legendre
         fitPs();
         fitCs();
     }
-
 
     private void fitCs()
     {
@@ -38,6 +42,8 @@ public class Legendre
         c[4] =  4.5 * integrator.step(a,b);
 
     }
+
+
     private void fitPs()
     {
         this.p = new fX[5];

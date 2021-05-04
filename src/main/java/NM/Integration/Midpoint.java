@@ -6,35 +6,62 @@ public class Midpoint extends Integrator
 {
     public Midpoint( fX f, double... xs)
     {
-        super(f,xs);
-        this.nodes = xs.length-1;
+        super(xs.length-1,f,xs);
+    }
+
+
+
+    public Midpoint(int n, fX f, double...xs){
+        super(n,f,xs);
+    }
+
+    public Midpoint( int nodes, fX f , double a , double b)
+    {
+        super(nodes,f,a,b);
+    }
+
+    /**
+     *  Composite rule,
+     *  * equally spaced nodes,
+     *  Mn[a,b] =  h ( f[(x0 + x1)/2] +  f[(x1 + x2)/2] + ...  +  f[(xn-1 + xn)/2])
+     */
+    @Override
+    public double nRule(double a, double b) {
+        double sum =0; //h
+        for (int i = 0; i< nodes; i++)
+        {
+            if (DEBUG)
+            {
+                System.out.println(xs[i] + " -> "+f(xs[i]));
+                //System.out.println(" Mid : " +xk[i] + " fX  -> "+f(xk[i]));
+                //System.out.println(" I"+i+" : " + sum);
+            }
+            sum+= f((xs[i] +xs[i+1])/2);
+        }
+        System.out.println(xs[xs.length-1] + " -> "+f(xs[xs.length-1]));
+        return sum *  ((b-a)/nodes);   // h
     }
 
     @Override
-    double integrate(int a, int b) {
-        return 0;
-    }
-
-    public double integrate()
-    {
-        double integral = 0;
-        double [] xk = new double[nodes];
-        for (int i = 0; i< nodes; i++) {
-            xk[i] = (this.xs[i+1]+this.xs[i])/2 ;
-            System.out.println(xk[i] + " -> " + f.f_x(xk[i]));
-        }
-        for (int i = 0; i< nodes; i++){
-            integral+= (this.xs[i+1]-this.xs[i])* f.f_x(xk[i]);
-        }
-        return integral;
+    public double step(double a, double b) {
+        return (b-a)*f((b+a)/2);
     }
 
     public static void main(String[] args)
     {
+
         fX f = (x)-> 1/(1+ (x*x));
         int a = 1,b = 4;
         Midpoint m = new Midpoint(f, 1,1.5,2,3,3.5,4);
-        System.out.println(m.integrate(a,b));
+        System.out.println(m.nRule(a,b));
+         /*
+        fX f = Math::cos;
+        double [] xs = Interpolation.linX(-1,1,100);
+        Midpoint m = new Midpoint(f,xs);
+        System.out.println(m.integrate());
+        System.out.println(m.integrate(-1,1));
+
+         */
     }
 
 }

@@ -21,15 +21,15 @@ public class FourierApprox
     }
 
     private void compute() {
-        this.a[0] =(1/PI) * this.integrator.integrate(-PI,PI);
+        this.a[0] =(1/PI) * this.integrator.nRule(-PI,PI);
         for (int i = 1; i< this.a.length; i++){
             final int I = i;
             fX f1 = (x)-> f.f_x(x) * cos(I * x);
             fX f2 = (x)-> f.f_x(x) * sin(I * x);
             this.integrator.setF(f1);
-            this.a[i] =(1/PI) * this.integrator.integrate(-PI,PI);
+            this.a[i] =(1/PI) * this.integrator.nRule(-PI,PI);
             this.integrator.setF(f2);
-            this.b[i] =(1/PI) * this.integrator.integrate(-PI,PI);
+            this.b[i] =(1/PI) * this.integrator.nRule(-PI,PI);
         }
         s = (x)-> {
             double sum = this.a[0];
