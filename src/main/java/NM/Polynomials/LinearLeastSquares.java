@@ -3,6 +3,8 @@ package NM.Polynomials;
 import NM.Graph.Plot;
 import NM.Util.Matrix;
 import NM.Util.functions.fX;
+import NM.Util.functions.function;
+import org.jetbrains.annotations.Contract;
 
 import static java.lang.Math.pow;
 
@@ -34,9 +36,11 @@ public class LinearLeastSquares
         X2Avg= x2sum / this.xs.length;
     }
 
+    @Contract(pure = true)
     private double a0(){
-        return YAvg- a1() * XAvg;
+        return YAvg - a1() * XAvg;
     }
+    @Contract(pure = true)
     private double a1(){
         return (XYAvg - (XAvg * YAvg))/(X2Avg - pow(XAvg,2));
     }
@@ -116,6 +120,8 @@ public class LinearLeastSquares
         p.scale(400);
         p.translate(-200,200);
         p.plot(x,y).plot2(xs,ys);
+
+
 
     }
 }

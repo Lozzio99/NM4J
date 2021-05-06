@@ -8,14 +8,15 @@ public abstract class Integrator
     protected fX f;
     protected int nodes;
 
-    protected final boolean DEBUG = true;
+    protected final boolean DEBUG = false;
 
     public Integrator(int nStep, fX f, double... xs)
     {
         this.nodes = nStep;
         this.f = f;
         this.xs = xs;
-        this.xk = new double[nodes];
+        if (nodes>= 0)
+            this.xk = new double[nodes];
     }
     public Integrator(fX f, double...xs)
     {
