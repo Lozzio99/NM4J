@@ -32,8 +32,8 @@ public class Midpoint extends Integrator
         {
             if (DEBUG)
             {
-                System.out.println(xs[i] + " -> "+f(xs[i]));
-                //System.out.println(" Mid : " +xk[i] + " fX  -> "+f(xk[i]));
+                //System.out.println(xs[i] + " -> "+f(xs[i]));
+                System.out.println(" Mid : " +((xs[i] +xs[i+1])/2) + " fX  -> "+f((xs[i] +xs[i+1])/2));
                 //System.out.println(" I"+i+" : " + sum);
             }
             sum+= f((xs[i] +xs[i+1])/2);
