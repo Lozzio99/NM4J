@@ -116,6 +116,25 @@ public class Plot extends Canvas
         return this;
     }
 
+    public Plot plotF(fX f, double [] xs ){
+        double[] x = Interpolation.linX(-100,100,400);
+        double[] y = new double [400];
+        for (int i = 0; i< 400; i++)
+            y[i] = f.f_x(x[i]);
+        return this.plot(x,y);
+    }
+
+
+    public Plot plotF2(fX f, double [] xs ){
+        double[] x = Interpolation.linX(-100,100,400);
+        double[] y = new double [400];
+        for (int i = 0; i< 400; i++)
+            y[i] = f.f_x(x[i]);
+        return this.plot2(x,y);
+    }
+
+
+
 
 
     public Plot plot2(double[]xs, double[] ys)

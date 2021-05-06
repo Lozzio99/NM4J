@@ -3,8 +3,10 @@ package NM.Polynomials;
 import NM.Graph.Plot;
 import NM.Integration.Simpsons;
 import NM.Util.functions.fX;
+import NM.Util.functions.function;
 
-
+import static java.lang.Math.exp;
+import static java.lang.Math.pow;
 
 
 public class Legendre
@@ -100,17 +102,15 @@ public class Legendre
 
 
     public static void main(String[] args) {
-        fX f = (x)-> 1/(x+2);
-        Legendre l = new Legendre(f,-1,1);
-        l.setX(0.6);
+
+        fX f = (x)-> pow(x,3);
+        fX f2 = Math::exp;
+        fX f3 = (x)->1;
+        Legendre l = new Legendre(f3,-1,1);
+
         l.print();
-        System.out.println(l.g(0.6));
+        System.out.println(l.g(1));
 
-        double []x = Interpolation.linX(-1,1,200),y = l.g(x);
-
-        Plot p = new Plot();
-        p.scale(110);
-        p.plot(x,y);
 
     }
 
