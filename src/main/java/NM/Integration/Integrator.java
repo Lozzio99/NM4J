@@ -5,7 +5,7 @@ import NM.Util.functions.fX;
 public abstract class Integrator
 {
     protected double [] xs,xk;
-    protected fX f;
+    public fX f;
     protected int nodes;
 
     protected final boolean DEBUG = false;

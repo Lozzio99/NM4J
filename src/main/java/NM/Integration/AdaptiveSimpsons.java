@@ -5,9 +5,9 @@ import NM.Util.functions.fX;
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 
-public class AdaptiveSimpsons extends Simpsons{
+public class AdaptiveSimpsons extends Simpsons {
 
-    double epsilon = 0.01;
+    double epsilon = 0.000001;
 
     public AdaptiveSimpsons(fX f, double ... xs) {
         super(xs.length-1,f,xs);

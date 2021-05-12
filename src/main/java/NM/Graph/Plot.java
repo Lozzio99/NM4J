@@ -61,11 +61,11 @@ public class Plot extends Canvas
             this.axis();
         this.start();
     }
-    public Plot setFit(int fit){
+    public Plot setFit(int fit)
+    {
         FIT = fit;
         return this;
     }
-
     public Plot plot(fX f)
     {
         calculated = false;
@@ -73,7 +73,6 @@ public class Plot extends Canvas
         this.plot();
         return this;
     }
-
     /**
      * Requires sorted pairs of drawX and drawY 's
      */
@@ -96,7 +95,6 @@ public class Plot extends Canvas
         calculated = true;
         return this;
     }
-
     public Plot plot(double[] xs, double[] ys)
     {
         calculated = false;
@@ -115,28 +113,22 @@ public class Plot extends Canvas
         calculated = true;
         return this;
     }
-
-    public Plot plotF(fX f, double [] xs ){
+    public Plot plotF(fX f, double [] xs )
+    {
         double[] x = Interpolation.linX(-100,100,400);
         double[] y = new double [400];
         for (int i = 0; i< 400; i++)
             y[i] = f.f_x(x[i]);
         return this.plot(x,y);
     }
-
-
-    public Plot plotF2(fX f, double [] xs ){
+    public Plot plotF2(fX f, double [] xs )
+    {
         double[] x = Interpolation.linX(-100,100,400);
         double[] y = new double [400];
         for (int i = 0; i< 400; i++)
             y[i] = f.f_x(x[i]);
         return this.plot2(x,y);
     }
-
-
-
-
-
     public Plot plot2(double[]xs, double[] ys)
     {
         calculated = false;
@@ -152,7 +144,6 @@ public class Plot extends Canvas
         calculated = true;
         return this;
     }
-
     /**
      * sorts the arrays by reference
      * @param xs the arrays which will give the sorting order
@@ -186,7 +177,6 @@ public class Plot extends Canvas
             xs[i+1] = key;
         }
     }
-
     private void axis()
     {
         Point px = new Point(-400,0),py = new Point(0,-400), px1 = new Point(400,0), py1 = new Point(0,400);
@@ -210,13 +200,11 @@ public class Plot extends Canvas
         }
         calculated = true;
     }
-
     private void start()
     {
         Timer t = new Timer(100,(e) -> render());
         t.start();
     }
-
     public void translate(double x, double y)
     {
         ORIGIN.xOff+= x;
@@ -244,7 +232,6 @@ public class Plot extends Canvas
         g.dispose();
         bs.show();
     }
-
     private void draw(Graphics2D g)
     {
         if (drawAxis) {
@@ -282,10 +269,6 @@ public class Plot extends Canvas
         }
 
     }
-
-
-
-
     public Plot fit(double []xs, double [] ys)
     {
         switch (FIT){

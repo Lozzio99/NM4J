@@ -16,7 +16,7 @@ class LegendreTest {
     @BeforeEach
     void setUp() {
         fX f = (x)-> 1/(x+2);
-        legendre = new Legendre(f,-1,1);
+        legendre = new Legendre(f,-1,1,4);
         legendre.setX(0.6);
     }
 

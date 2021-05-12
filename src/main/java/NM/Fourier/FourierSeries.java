@@ -27,7 +27,6 @@ public class FourierSeries
         return this.s.f_x(x);
     }
 
-
     public static void main(String[] args) {
         FourierSeries f = new FourierSeries(6),f2 = new FourierSeries(104);
         double [] xs = Interpolation.linX(-5*PI,5*PI,300);
