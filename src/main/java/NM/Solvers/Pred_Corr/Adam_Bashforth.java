@@ -1,24 +1,31 @@
 package NM.Solvers.Pred_Corr;
 
-import NM.Util.functions.fYT;
 import NM.Solvers.RungeKutta.Ralston_s2nd;
 import NM.Solvers.RungeKutta.Runge_kutta3rd;
 import NM.Solvers.RungeKutta.Runge_kutta4th;
 import NM.Solvers.Solver;
+import NM.Util.functions.Fty;
 
 import static java.lang.Double.NaN;
 
 
-public class Adam_Bashforth extends Solver
-{
+public class Adam_Bashforth extends Solver {
 
-    public double w_1 = NaN,w_2 = NaN,w_3 = NaN;
+    public double w_1 = NaN, w_2 = NaN, w_3 = NaN;
+
+    /**
+     * Constructor,
+     * set starting time t = 0;
+     *
+     * @param f
+     */
+    public Adam_Bashforth(Fty<Double> f) {
+        super(f);
+    }
 
     @Override
-    public void solve()
-    {
-        switch (order)
-        {
+    public void solve() {
+        switch (order) {
             case 2 -> {
                 this.w_1 = this.w;
                 this.w = Ralston_s2nd.Ralston2ndOrderStep(this.f, this.w, this.h, this.t);
@@ -86,13 +93,12 @@ public class Adam_Bashforth extends Solver
 
     }
 
-    public static double AdamBashforth2ndStep(fYT f, double w, double w_1, double t, double t_1, double h)
-    {
+    public static double AdamBashforth2ndStep(Fty<Double> f, double w, double w_1, double t, double t_1, double h) {
         System.out.print("\nPredictor : ");
-        System.out.println ("§w (i+1) = w + 1/2 h  ( 3 f(t,w) - f(t-1,w-1) ))");
-        double ftw = f.f_y(t,w);
-        double ftw1 = f.f_y(t_1,w_1);
-        double w1 = w + (h/2*(3*ftw-ftw1))  ;
+        System.out.println("§w (i+1) = w + 1/2 h  ( 3 f(t,w) - f(t-1,w-1) ))");
+        double ftw = f.f_y(t, w);
+        double ftw1 = f.f_y(t_1, w_1);
+        double w1 = w + (h / 2 * (3 * ftw - ftw1));
         System.out.print("f(t,w) : ");
         System.out.print(ftw);
         System.out.print("  f(t-1,w-1)  : ");

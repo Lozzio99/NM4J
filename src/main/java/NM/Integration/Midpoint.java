@@ -1,23 +1,20 @@
 package NM.Integration;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public class Midpoint extends Integrator
 {
-    public Midpoint( fX f, double... xs)
-    {
-        super(xs.length-1,f,xs);
+    public Midpoint(Fx f, double... xs) {
+        super(xs.length - 1, f, xs);
     }
 
 
-
-    public Midpoint(int n, fX f, double...xs){
-        super(n,f,xs);
+    public Midpoint(int n, Fx f, double... xs) {
+        super(n, f, xs);
     }
 
-    public Midpoint( int nodes, fX f , double a , double b)
-    {
-        super(nodes,f,a,b);
+    public Midpoint(int nodes, Fx f, double a, double b) {
+        super(nodes, f, a, b);
     }
 
     /**
@@ -50,8 +47,8 @@ public class Midpoint extends Integrator
     public static void main(String[] args)
     {
 
-        fX f = (x)-> 1/(1+ (x*x));
-        int a = 1,b = 4;
+        Fx<Double> f = (x) -> 1 / (1 + (x * x));
+        int a = 1, b = 4;
         Midpoint m = new Midpoint(f, 1,1.5,2,3,3.5,4);
         System.out.println(m.nRule(a,b));
          /*

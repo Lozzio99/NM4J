@@ -1,26 +1,34 @@
 package NM.Roots;
 
-public class Bisection extends Root
-{
+import NM.Util.functions.Fx;
+
+import static java.lang.StrictMath.signum;
+
+public class Bisection extends Root {
+
+    public Bisection(Fx<Double> f) {
+        super(f);
+    }
 
     @Override
-    public double findRoot(double a , double b){
-
-        while((b-a)/2>epsilon)
-        {
-            double c = (a+b)/2;
+    public double findRoot(double a, double b) {
+        double steps = 0;
+        while ((b - a) / 2 > epsilon) {
+            double c = (a + b) / 2;
             this.p_stages.add(c);
-            if (Math.signum(f.f_x(c))== Math.signum(f.f_x(a)))
+            if (signum(f.f_x(c)) == signum(f.f_x(a))) {
                 a = c;
-            else
+            } else {
                 b = c;
+            }
+            steps++;
         }
-        return (a+b)/2;
+        return this.root = ((a + b) / 2);
     }
 
     @Override
     public double findRoot(double p) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
 

@@ -10,15 +10,15 @@ import static java.lang.Math.pow;
  */
 public class SecondDerivative extends Derivative
 {
-    private static dfdX secondDerivative = (x, f1) -> ((f.f_x(x-h) - (2*f.f_x(x)) + f.f_x(x+ h))/(pow(h,2)));
+    private static final dfdX<Double> secondDerivative = (x, f1) -> ((f.f_x(x - h) - (2 * f.f_x(x)) + f.f_x(x + h)) / (pow(h, 2)));
 
-    private static dfdX ThreePointScheme = (x, f)-> (f(x) - (2*f(x+h))+ f(x+(2*h)))/(pow(h,2));
+    private static final dfdX<Double> ThreePointScheme = (x, f) -> (f(x) - (2 * f(x + h)) + f(x + (2 * h))) / (pow(h, 2));
 
-    private static dfdX FivePointForward = (x, f)-> (-f(x-2*h) + 16*f(x-h) - 30*f(x) + 16*f(x+h) - f(x+2*h))/(12*pow(h,2));
+    private static final dfdX<Double> FivePointForward = (x, f) -> (-f(x - 2 * h) + 16 * f(x - h) - 30 * f(x) + 16 * f(x + h) - f(x + 2 * h)) / (12 * pow(h, 2));
 
-    private static dfdX FivePointAsymm = (x, f) -> (11*f(x-h)- 20*f(x) + 6*f(x+h) + 4*f(x+2*h) - f(x+3*h))/(12*pow(h,2));
+    private static final dfdX<Double> FivePointAsymm = (x, f) -> (11 * f(x - h) - 20 * f(x) + 6 * f(x + h) + 4 * f(x + 2 * h) - f(x + 3 * h)) / (12 * pow(h, 2));
 
-    private static dfdX FivePointCentred = (x, f)-> (35*f(x)- 104*f(x+h) + 114*f(x+2*h)- 56*f(x+3*h) + 11*f(x+4*h))/(12*pow(h,2));
+    private static final dfdX<Double> FivePointCentred = (x, f) -> (35 * f(x) - 104 * f(x + h) + 114 * f(x + 2 * h) - 56 * f(x + 3 * h) + 11 * f(x + 4 * h)) / (12 * pow(h, 2));
 
     public static void main(String[] args) {
         SecondDerivative d = new SecondDerivative();

@@ -1,12 +1,13 @@
 package NM.Polynomials;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.Math.abs;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LegendreTest {
 
@@ -15,7 +16,7 @@ class LegendreTest {
 
     @BeforeEach
     void setUp() {
-        fX f = (x)-> 1/(x+2);
+        Fx<Double> f = (x) -> 1 / (x + 2);
         legendre = new Legendre(f,-1,1,4);
         legendre.setX(0.6);
     }

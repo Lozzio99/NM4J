@@ -1,27 +1,29 @@
 package NM.Solvers;
 
-import NM.Util.functions.fYT;
+import NM.Util.functions.Fty;
 
 import java.util.List;
 
 import static java.lang.Double.NaN;
+import static java.lang.StrictMath.floor;
+import static java.lang.StrictMath.pow;
 
 public abstract class Solver
 {
     protected double h;
     protected double tf;
-    protected fYT f;
+    protected static boolean PRINT_STEPS = false;
     protected double t;
-
     protected  int order = 0;
-
     protected double w = NaN;
+    protected Fty<Double> f;
 
     /**
      * Constructor,
      * set starting time t = 0;
      */
-    public Solver(){
+    public Solver(Fty<Double> f) {
+        this.f = f;
         this.t = 0;
     }
 
@@ -50,15 +52,6 @@ public abstract class Solver
         return this;
     }
 
-    /**
-     * f(t,y) -> {  }
-     * @param f the function to analyse
-     * @return the same solver
-     */
-    public Solver setFunction(fYT f){
-        this.f = f;
-        return this;
-    }
 
     /**
      * The upper bound for integration
@@ -81,23 +74,28 @@ public abstract class Solver
             this.step(this.w,this.h);
             this.t += this.h;
         }
-        System.out.println("t : " + (float)this.t + " -> w : " + this.w);
+        if (PRINT_STEPS) System.out.println("t : " + (float) this.t + " -> w : " + this.w);
     }
 
     public abstract void step(double w, double h);
 
 
-    public double getW(){
+    public double getW() {
         return this.w;
     }
 
+    public double getW(int dp) {
+        //return floor(this.w*dp)/dp;
+        return floor(w * pow(10, dp)) / pow(10, dp);
+    }
 
-    public Solver setOrder(int i){
+
+    public Solver setOrder(int i) {
         this.order = i;
         return this;
     }
 
-    public List<Double> getW_t(){
+    public List<Double> getW_t() {
         return null;
     }
 }

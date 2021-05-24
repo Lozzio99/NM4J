@@ -1,11 +1,8 @@
 package NM.Polynomials;
 
-import NM.Graph.Plot;
 import NM.Util.Matrix;
-import NM.Util.functions.fX;
-import NM.Util.functions.function;
+import NM.Util.functions.Fx;
 import org.jetbrains.annotations.Contract;
-import org.junit.jupiter.api.Test;
 
 import static java.lang.Math.pow;
 
@@ -46,7 +43,7 @@ public class LinearLeastSquares
         return (XYAvg - (XAvg * YAvg))/(X2Avg - pow(XAvg,2));
     }
 
-    private final fX g = (x) -> a0() + a1()*x;
+    private final Fx<Double> g = (x) -> a0() + a1() * x;
 
     public double g(double x){ return g.f_x(x); }
 
@@ -61,9 +58,9 @@ public class LinearLeastSquares
     public static class Quadratic extends LinearLeastSquares
     {
         private Matrix a;
-        private final fX g = (x) ->{
-            System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + "+ a.matrix[2][0]+ " x^2" );
-            return a.matrix[0][0]+ a.matrix[1][0]*x + a.matrix[2][0] * pow(x,2);
+        private final Fx<Double> g = (x) -> {
+            System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + " + a.matrix[2][0] + " x^2");
+            return a.matrix[0][0] + a.matrix[1][0] * x + a.matrix[2][0] * pow(x, 2);
         };
 
         public Quadratic(double[] x, double[] y) {
@@ -115,9 +112,9 @@ public class LinearLeastSquares
     public static class Cubic extends LinearLeastSquares{
 
         private Matrix a;
-        private final fX g = (x) ->{
-            System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + "+ a.matrix[2][0]+ " x^2 + "+a.matrix[3][0] + " x^3" );
-            return a.matrix[0][0]+ a.matrix[1][0]*x + a.matrix[2][0] * pow(x,2) + a.matrix[3][0] * pow(x,3);
+        private final Fx<Double> g = (x) -> {
+            System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + " + a.matrix[2][0] + " x^2 + " + a.matrix[3][0] + " x^3");
+            return a.matrix[0][0] + a.matrix[1][0] * x + a.matrix[2][0] * pow(x, 2) + a.matrix[3][0] * pow(x, 3);
         };
         public Cubic(double[] xs, double[] ys) {
             super(xs, ys);

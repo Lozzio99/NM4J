@@ -1,12 +1,11 @@
 package NM.Integration;
 
-import NM.Util.functions.fX;
-import org.junit.jupiter.api.BeforeEach;
+import NM.Util.functions.Fx;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.Math.abs;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IntegratorTest {
 
@@ -15,7 +14,7 @@ class IntegratorTest {
     static double []xs ;
     static double accuracy = 1e3;
     static {
-        fX f = (x)-> 1/(1+ (x*x));
+        Fx<Double> f = (x) -> 1 / (1 + (x * x));
         a = 1; b = 4;
         xs = new double[]{1,1.5,2,3,3.5,4};
         t = new Trapezoid(f,xs);

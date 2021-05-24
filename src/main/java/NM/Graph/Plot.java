@@ -3,7 +3,7 @@ package NM.Graph;
 import NM.Polynomials.DividedDifferences;
 import NM.Polynomials.Interpolation;
 import NM.Polynomials.LinearLeastSquares;
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
 import java.util.Arrays;
 
-import static java.lang.Math.*;
+import static java.lang.Math.sin;
 
 public class Plot extends Canvas
 {
@@ -26,19 +26,21 @@ public class Plot extends Canvas
     }
 
     private final JFrame frame;
-    private fX f;
+    private static final int sz = 400;
     private WindowEvent listen;
-    final static Dimension screen = new Dimension(500,500);
-    static Point ORIGIN ;
-    private Point[] p1,p2;
-    private Line2D.Double x,y;
-    private boolean calculated = false, drawAxis = true, plot2 = false;
-    private static int FIT = 1,sz = 400;
-    public static final int DIVIDED_DIFFERENCES = 1, LINEAR_LEAST_SQUARES = 2, QUADRATIC_SQUARES = 3, LEGENDRE = 4,LAGRANGE = 5, CHEBYSHEV = 6;
+    final static Dimension screen = new Dimension(500, 500);
+    static Point ORIGIN;
+    private Point[] p1, p2;
+    private Line2D.Double x, y;
+    private static int FIT = 1;
+    private final boolean drawAxis = true;
+    private Fx<Double> f;
+    private boolean calculated = false;
+    private boolean plot2 = false;
+    public static final int DIVIDED_DIFFERENCES = 1, LINEAR_LEAST_SQUARES = 2, QUADRATIC_SQUARES = 3, LEGENDRE = 4, LAGRANGE = 5, CHEBYSHEV = 6;
 
 
-    public Plot()
-    {
+    public Plot() {
         this.frame = new JFrame();
         this.frame.setSize(screen);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -61,17 +63,31 @@ public class Plot extends Canvas
             this.axis();
         this.start();
     }
-    public Plot setFit(int fit)
-    {
+
+    public Plot setFit(int fit) {
         FIT = fit;
         return this;
     }
-    public Plot plot(fX f)
-    {
-        calculated = false;
-        this.f = f;
-        this.plot();
-        return this;
+
+    /**
+     * sorts the arrays by reference
+     *
+     * @param xs the arrays which will give the sorting order
+     * @param ys the xs index - related values
+     */
+    public static void sortingForDrawing(double[] xs, double[] ys) {
+        int n = xs.length;
+        for (int j = 1; j < n; j++) {
+            double key = xs[j], y_key = ys[j];
+            int i = j - 1;
+            while ((i > -1) && (xs[i] > key)) {
+                xs[i + 1] = xs[i];
+                ys[i + 1] = ys[i];
+                i--;
+            }
+            xs[i + 1] = key;
+            ys[i + 1] = y_key;
+        }
     }
     /**
      * Requires sorted pairs of drawX and drawY 's
@@ -102,84 +118,71 @@ public class Plot extends Canvas
             throw new IllegalArgumentException("drawX and drawY must have the same size");
         if (xs.length>1000)
             throw new UnsupportedOperationException("need to implement multiple points arrays");
-        double[]x,y;
-        x = Arrays.copyOf(xs,xs.length);
-        y = Arrays.copyOf(ys,ys.length);
-        sortingForDrawing(x,y);
+        double[] x, y;
+        x = Arrays.copyOf(xs, xs.length);
+        y = Arrays.copyOf(ys, ys.length);
+        sortingForDrawing(x, y);
         this.p1 = new Point[xs.length];
-        for (int i = 0; i< this.p1.length; i++){
-            this.p1[i] = new Point(x[i],y[i]);
+        for (int i = 0; i < this.p1.length; i++) {
+            this.p1[i] = new Point(x[i], y[i]);
         }
         calculated = true;
         return this;
     }
-    public Plot plotF(fX f, double [] xs )
-    {
-        double[] x = Interpolation.linX(-100,100,400);
-        double[] y = new double [400];
-        for (int i = 0; i< 400; i++)
-            y[i] = f.f_x(x[i]);
-        return this.plot(x,y);
-    }
-    public Plot plotF2(fX f, double [] xs )
-    {
-        double[] x = Interpolation.linX(-100,100,400);
-        double[] y = new double [400];
-        for (int i = 0; i< 400; i++)
-            y[i] = f.f_x(x[i]);
-        return this.plot2(x,y);
-    }
-    public Plot plot2(double[]xs, double[] ys)
-    {
-        calculated = false;
-        plot2 = true;
-        double[]x,y;
-        x = Arrays.copyOf(xs,xs.length);
-        y = Arrays.copyOf(ys,ys.length);
-        sortingForDrawing(x,y);
-        this.p2 = new Point[xs.length];
-        for (int i = 0; i< this.p2.length; i++){
-            this.p2[i] = new Point(x[i],y[i]);
-        }
-        calculated = true;
-        return this;
-    }
-    /**
-     * sorts the arrays by reference
-     * @param xs the arrays which will give the sorting order
-     * @param ys the xs index - related values
-     */
-    public static void sortingForDrawing(double xs[], double []ys)
-    {
-        int n = xs.length;
-        for (int j = 1; j < n; j++) {
-            double key = xs[j],y_key = ys[j];
-            int i = j-1;
-            while ( (i > -1) && ( xs [i] > key ) ) {
-                xs [i+1] = xs [i];
-                ys [i+1] = ys [i];
-                i--;
-            }
-            xs[i+1] = key;
-            ys[i+1] = y_key;
-        }
-    }
-    public static void sort(double xs[])
-    {
+
+    public static void sort(double[] xs) {
         int n = xs.length;
         for (int j = 1; j < n; j++) {
             double key = xs[j];
-            int i = j-1;
-            while ( (i > -1) && ( xs [i] > key ) ) {
-                xs [i+1] = xs [i];
+            int i = j - 1;
+            while ((i > -1) && (xs[i] > key)) {
+                xs[i + 1] = xs[i];
                 i--;
             }
-            xs[i+1] = key;
+            xs[i + 1] = key;
         }
     }
-    private void axis()
-    {
-        Point px = new Point(-400,0),py = new Point(0,-400), px1 = new Point(400,0), py1 = new Point(0,400);
+
+    public Plot plot(Fx<Double> f) {
+        calculated = false;
+        this.f = f;
+        this.plot();
+        return this;
+    }
+
+    public Plot plot2(double[] xs, double[] ys) {
+        calculated = false;
+        plot2 = true;
+        double[] x, y;
+        x = Arrays.copyOf(xs, xs.length);
+        y = Arrays.copyOf(ys, ys.length);
+        sortingForDrawing(x, y);
+        this.p2 = new Point[xs.length];
+        for (int i = 0; i < this.p2.length; i++) {
+            this.p2[i] = new Point(x[i], y[i]);
+        }
+        calculated = true;
+        return this;
+    }
+
+    public Plot plotF(Fx<Double> f, double[] xs) {
+        double[] x = Interpolation.linX(-100, 100, 400);
+        double[] y = new double[400];
+        for (int i = 0; i < 400; i++)
+            y[i] = f.f_x(x[i]);
+        return this.plot(x, y);
+    }
+
+    public Plot plotF2(Fx<Double> f, double[] xs) {
+        double[] x = Interpolation.linX(-100, 100, 400);
+        double[] y = new double[400];
+        for (int i = 0; i < 400; i++)
+            y[i] = f.f_x(x[i]);
+        return this.plot2(x, y);
+    }
+
+    private void axis() {
+        Point px = new Point(-400, 0), py = new Point(0, -400), px1 = new Point(400, 0), py1 = new Point(0,400);
         this.x = new Line2D.Double(px.getX(),px.getY(),px1.getX(),px1.getY());
         this.y = new Line2D.Double(py.getX(),py.getY(),py1.getX(),py1.getY());
     }

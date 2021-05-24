@@ -1,6 +1,6 @@
 package NM.Integration;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
@@ -9,11 +9,12 @@ public class AdaptiveTrapezoid extends Trapezoid
 {
     double epsilon = 0.001;
 
-    public AdaptiveTrapezoid(fX f,double... xs){
-        super(xs.length-1,f,xs);
+    public AdaptiveTrapezoid(Fx<?> f, double... xs) {
+        super(xs.length - 1, f, xs);
     }
-    public AdaptiveTrapezoid(int n, fX f, double...xs){
-        super(n,f,xs);
+
+    public AdaptiveTrapezoid(int n, Fx<?> f, double... xs) {
+        super(n, f, xs);
     }
 
     public double nRule(double a, double b){
@@ -26,8 +27,8 @@ public class AdaptiveTrapezoid extends Trapezoid
     }
 
     public static void main(String[] args) {
-        fX f = (x)-> 1/(3+pow(x,4));
-        AdaptiveTrapezoid a = new AdaptiveTrapezoid(f, 0,2);
+        Fx<Double> f = (x) -> 1 / (3 + pow(x, 4));
+        AdaptiveTrapezoid a = new AdaptiveTrapezoid(f, 0, 2);
         System.out.println(a.nRule(0,2.));
     }
 }

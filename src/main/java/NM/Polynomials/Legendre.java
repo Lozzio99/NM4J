@@ -1,30 +1,31 @@
 package NM.Polynomials;
 
 import NM.Integration.Simpsons;
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public class Legendre extends AbstractLegendre
 {
 
     private int degree = 1;
-    public Legendre(fX f, double a, double b, int degree)
-    {
+
+    public Legendre(Fx<Double> f, double a, double b, int degree) {
         this.f = f;
         this.a = a;
         this.b = b;
         this.degree = degree;
-        integrator= new Simpsons(20,this.f, a,b);
+        integrator = new Simpsons(20, this.f, a, b);
         fitPs();
         fitCs();
     }
-    private void fitPs(){
-        this.p = new fX[degree+1];
-        this.p[0] = x->1;
-        this.p[1] = x->x;
-        for (int i = 2; i< p.length; i++) {
+
+    private void fitPs() {
+        this.p = ((Fx<Double>[]) new Fx[degree + 1]);
+        this.p[0] = x -> 1.;
+        this.p[1] = x -> x;
+        for (int i = 2; i < p.length; i++) {
             double k = i;
             int j = i;
-            p[i] = x-> (2-(1/k))*x*p[j-1].f_x(x) - (1-(1/k))*p[j-2].f_x(x);
+            p[i] = x -> (2 - (1 / k)) * x * p[j - 1].f_x(x) - (1 - (1 / k)) * p[j - 2].f_x(x);
         }
     }
 
@@ -47,7 +48,7 @@ public class Legendre extends AbstractLegendre
         return sum;
     }
 
-    public fX g() {
+    public Fx<Double> g() {
         return this::g;
     }
 

@@ -1,6 +1,5 @@
 package NM.Util.functions;
 
-public interface dfdX
-{
-    double dfdx(double x, fX f);
+public interface dfdX<E> {
+    E dfdx(E x, Fx<E> f);
 }

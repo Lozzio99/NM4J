@@ -1,14 +1,14 @@
 package NM.Polynomials;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public abstract class Interpolation {
 
-    public fX f ;
-    public double []xs ;
+    public Fx<Double> f;
+    public double[] xs;
     public double []ys ;
 
-    public Interpolation(fX f, double... x) {
+    public Interpolation(Fx<Double> f, double... x) {
         this.f = f;
         xs = x;
         ys = fill(xs);

@@ -1,38 +1,36 @@
 package NM.Integration;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public abstract class Integrator
 {
-    protected double [] xs,xk;
-    public fX f;
+    protected double [] xs, xk;
+    public Fx<Double> f;
     protected int nodes;
 
     protected final boolean DEBUG = false;
 
-    public Integrator(int nStep, fX f, double... xs)
-    {
+    public Integrator(int nStep, Fx<Double> f, double... xs) {
         this.nodes = nStep;
         this.f = f;
         this.xs = xs;
-        if (nodes>= 0)
+        if (nodes >= 0)
             this.xk = new double[nodes];
     }
-    public Integrator(fX f, double...xs)
-    {
-        this(xs.length-1,f,xs);
+
+    public Integrator(Fx<Double> f, double... xs) {
+        this(xs.length - 1, f, xs);
     }
 
-    public Integrator( int nodes, fX f , double a , double b)
-    {
-        this(nodes,f);
-        this.xs = new double[nodes+1];
-        double h = (b-a)/nodes;
+    public Integrator(int nodes, Fx<Double> f, double a, double b) {
+        this(nodes, f);
+        this.xs = new double[nodes + 1];
+        double h = (b - a) / nodes;
         double a1 = a;
-        for (int i = 0; i< xs.length-1; i++) {
+        for (int i = 0; i < xs.length - 1; i++) {
             xs[i] = a1;
-            xk[i] = ((xs[i]+h)-xs[i])/2;
-            a1+= h;
+            xk[i] = ((xs[i] + h) - xs[i]) / 2;
+            a1 += h;
         }
         xs[xs.length-1] = b;
     }
@@ -60,10 +58,10 @@ public abstract class Integrator
     abstract double step(double a, double b);
 
     public double f(double x){
-        return f.f_x(x);
+        return (f.f_x(x));
     }
 
-    public void setF(fX f) {
+    public void setF(Fx<Double> f) {
         this.f = f;
     }
 }

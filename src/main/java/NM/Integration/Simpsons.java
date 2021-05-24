@@ -1,31 +1,29 @@
 package NM.Integration;
 
 import NM.Polynomials.Lagrange;
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.pow;
 
-public class Simpsons extends Integrator
-{
+public class Simpsons extends Integrator {
     private Lagrange l;
 
-    public Simpsons(Lagrange g)
-    {
+    public Simpsons(Lagrange g) {
         super((x) -> x);
         this.l = g;
     }
 
-    public Simpsons (fX f, double ... x){
-        super(x.length-1,f,x);
+    public Simpsons(Fx<Double> fX, double... x) {
+        super(x.length - 1, fX, x);
     }
 
-    public Simpsons(int n, fX f, double...xs){
-        super(n,f,xs);
+    public Simpsons(int n, Fx<Double> f, double... xs) {
+        super(n, f, xs);
     }
 
-    public Simpsons( int nodes, fX f , double a , double b)
-    {
-        super(nodes,f,a,b);
+    public Simpsons(int nodes, Fx<Double> f, double a, double b) {
+        super(nodes, f, a, b);
     }
 
 
@@ -99,11 +97,22 @@ public class Simpsons extends Integrator
 
 
     public static void main(String[] args) {
-        fX f = (x)-> 1/(1+pow(x,2));
-        Simpsons s = new Simpsons(f,1,1.5,2,2.5,3,3.5,4.0);
+        Fx<Double> f = (x) -> 1 / (1 + pow(x, 2));
+        Simpsons s = new Simpsons(f, 1, 1.5, 2, 2.5, 3, 3.5, 4.0);
         //System.out.println(s.threeEightStep(1,4));
         //System.out.println(s.integrateStep(1,4));
-        s.integrate();
+        System.out.println(s.integrate());
+        System.out.println(s.nRule(1, 4));
         //System.out.println(s.integrate(1,4));
+
+        double[] xs = new double[201];
+        double h = (2 * PI) / 200;
+        double a = -PI;
+        for (int i = 0; i < 201; i++) {
+            xs[i] = a;
+            a += h;
+        }
+        System.out.println(xs[xs.length - 1]);
+        System.out.println(new Simpsons(f, xs).nRule(-PI, PI));
     }
 }

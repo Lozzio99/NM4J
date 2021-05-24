@@ -1,15 +1,13 @@
 package NM.Polynomials;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public class Lagrange extends Interpolation
 {
 
 
-
-    public Lagrange(fX f, double... x)
-    {
-       super(f,x);
+    public Lagrange(Fx f, double... x) {
+        super(f, x);
     }
 
 

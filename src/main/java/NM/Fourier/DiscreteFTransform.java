@@ -1,19 +1,20 @@
 package NM.Fourier;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 import static java.lang.Math.*;
 
-public class DiscreteFTransform
-{
-    private fX f,s;
-    double[] xs,ys;
+public class DiscreteFTransform {
+    private final Fx<Double> f;
+    private Fx<Double> s;
+    double[] xs, ys;
     double a0, a1, a2, b1, b2;
 
     int m;
-    public DiscreteFTransform(fX f, int m){
+
+    public DiscreteFTransform(Fx<Double> f, int m) {
         this.f = f;
-        this.xs = new double[(m*2)];
+        this.xs = new double[(m * 2)];
         this.ys = new double[xs.length];
         this.m = m;
         this.compute();
@@ -56,11 +57,11 @@ public class DiscreteFTransform
 
 
     public static void main(String[] args) {
-        fX f = (x)-> {
-            double t = pow(x,2)/4;
+        Fx<Double> f = (x) -> {
+            double t = pow(x, 2) / 4;
             return exp(-t);
         };
-        DiscreteFTransform fo = new DiscreteFTransform(f,3);
+        DiscreteFTransform fo = new DiscreteFTransform(f, 3);
         System.out.println(fo.s(1));
     }
 }

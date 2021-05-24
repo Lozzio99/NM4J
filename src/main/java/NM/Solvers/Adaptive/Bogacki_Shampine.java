@@ -1,26 +1,23 @@
 package NM.Solvers.Adaptive;
 
 import NM.Solvers.Solver;
+import NM.Util.functions.Fty;
 
-public class Bogacki_Shampine extends Solver
-{
+public class Bogacki_Shampine extends Solver {
 
     public double epsilon;
 
-    public Bogacki_Shampine()
-    {
-        super();
-
+    public Bogacki_Shampine(Fty<Double> f) {
+        super(f);
     }
 
-    public Solver setEpsilon(double epsilon){
+    public Solver setEpsilon(double epsilon) {
         this.epsilon = epsilon;
         return this;
     }
 
     @Override
-    public void step(double w, double h)
-    {
+    public void step(double w, double h) {
         System.out.println("t : " + (float)this.t + " -> w : " + this.w);
 
         double k1 = h * this.f.f_y(this.t, w);

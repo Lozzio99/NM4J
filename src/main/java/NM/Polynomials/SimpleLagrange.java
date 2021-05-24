@@ -1,11 +1,11 @@
 package NM.Polynomials;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public class SimpleLagrange
 {
 
-    fX f ;
+    Fx<Double> f;
 
     public double x1,x2,x0;
     public double y1,y2,y0;

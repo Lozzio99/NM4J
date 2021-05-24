@@ -1,11 +1,21 @@
 package NM.Solvers;
 
-public class EulerSolver extends Solver {
+import NM.Util.functions.Fty;
 
+public class EulerSolver extends Solver {
+    /**
+     * Constructor,
+     * set starting time t = 0;
+     *
+     * @param f
+     */
+    public EulerSolver(Fty<Double> f) {
+        super(f);
+    }
 
     @Override
     public void step(double y, double dt) {
-        this.w = y + (this.f.f_y(this.t,y)*dt);
+        this.w = y + (this.f.f_y(this.t, y) * dt);
     }
 
 }

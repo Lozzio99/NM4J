@@ -2,14 +2,14 @@ package NM.Fourier;
 
 import NM.Graph.Plot;
 import NM.Polynomials.Interpolation;
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 import static java.lang.Math.*;
 
 public class FourierSeries
 {
     int n;
-    fX s;
+    Fx<Double> s;
 
     public FourierSeries(int n)
     {

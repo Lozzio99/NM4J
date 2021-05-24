@@ -1,19 +1,18 @@
 package NM.Integration;
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 public class Trapezoid extends Integrator
 {
-    public Trapezoid(int nodes, fX f, double ... xs){
-        super(nodes,f,xs);
+    public Trapezoid(int nodes, Fx f, double... xs) {
+        super(nodes, f, xs);
     }
 
-    public Trapezoid(fX f, double... xs){
-        super(xs.length-1,f,xs);
+    public Trapezoid(Fx f, double... xs) {
+        super(xs.length - 1, f, xs);
     }
 
-    public Trapezoid( int nodes, fX f , double a , double b)
-    {
-        super(nodes,f,a,b);
+    public Trapezoid(int nodes, Fx f, double a, double b) {
+        super(nodes, f, a, b);
     }
 
 

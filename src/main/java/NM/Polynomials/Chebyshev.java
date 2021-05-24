@@ -1,23 +1,22 @@
 package NM.Polynomials;
 
-import NM.Util.functions.fX;
+import NM.Util.functions.Fx;
 
 import java.util.Arrays;
 
 // TODO: 02/05/2021 Find coefficients by fx
-public class Chebyshev
-{
+public class Chebyshev {
     private double[] c, Ts;
-    private double x;
-    private fX f = (x)->
+    private final double x;
+    private final Fx<Double> f = (x) ->
     {
         double x_ = 0;
-        for (int i = 0; i< this.c.length; i++)
-            x_+= c[i]* Ts[i];
+        for (int i = 0; i < this.c.length; i++)
+            x_ += c[i] * Ts[i];
         return x_;
     };
 
-    public Chebyshev(double[] c, double x, int level){
+    public Chebyshev(double[] c, double x, int level) {
         this.x = x;
         this.c = c;
         this.Ts = new double[level];

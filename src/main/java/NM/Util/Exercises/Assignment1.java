@@ -4,8 +4,8 @@ import NM.Solvers.Pred_Corr.Adam_Bashforth;
 import NM.Solvers.RungeKutta.Runge_kutta4th;
 import NM.Solvers.Solver;
 import NM.Util.Error.Error;
-import NM.Util.functions.fX;
-import NM.Util.functions.fYT;
+import NM.Util.functions.Fty;
+import NM.Util.functions.Fx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,8 @@ public class Assignment1
 assignment 1
 */
 
-    static fYT f = (t, y) -> {
-        t = (float) t;
-        return Math.sin(t) +y - Math.pow(y,3) ;
+    static Fty<Double> f = (t, y) -> {
+        return Math.sin(t) + y - Math.pow(y, 3);
     };
 
 
@@ -92,12 +91,11 @@ assignment 1
          EX assignment 1
 */
 
-        Solver v = new Adam_Bashforth()
+        Solver v = new Adam_Bashforth(f)
                 .setOrder(3)
                 .setInitialValue(initialValue)
                 .setInitialTime(initialTime)
                 .setH(dt)
-                .setFunction(f)
                 .setTimeFinal(tf);
         v.solve();
 
@@ -111,12 +109,11 @@ assignment 1
         System.out.println(Error.relativeError(-0.659969302,w));
 
 
-        v = new Adam_Bashforth()
+        v = new Adam_Bashforth(f)
                 .setOrder(3)
                 .setInitialValue(initialValue)
                 .setInitialTime(initialTime)
-                .setH(dt/2)
-                .setFunction(f)
+                .setH(dt / 2)
                 .setTimeFinal(tf);
         v.solve();
 
@@ -129,12 +126,11 @@ assignment 1
 
 
         tf = 5.2;
-        v = new Adam_Bashforth()
+        v = new Adam_Bashforth(f)
                 .setOrder(3)
                 .setInitialValue(initialValue)
                 .setInitialTime(initialTime)
-                .setH(dt/2)
-                .setFunction(f)
+                .setH(dt / 2)
                 .setTimeFinal(tf);
         v.solve();
         w = v.getW();
@@ -238,30 +234,27 @@ assignment 1
 
     }
 
-    private static void error(fX originalF, List<Double> w05, double exp1, double exp2)
-    {
-        System.out.println(w05 +" (first and last step) ");
-        System.out.println(" expected -> "+ exp1);
-        System.out.println("Relative error : " + Error.relativeError(exp1,w05.get(0)));
-        System.out.println("Absolute Error : " + Error.absoluteError(exp1,w05.get(0)));
-        System.out.println(" step 1.0 -> "+ exp2);
-        System.out.println("Relative error : " + Error.relativeError(exp2,w05.get(1)));
-        System.out.println("Absolute Error : " + Error.absoluteError(exp2,w05.get(1)));
+    private static void error(Fx originalF, List<Double> w05, double exp1, double exp2) {
+        System.out.println(w05 + " (first and last step) ");
+        System.out.println(" expected -> " + exp1);
+        System.out.println("Relative error : " + Error.relativeError(exp1, w05.get(0)));
+        System.out.println("Absolute Error : " + Error.absoluteError(exp1, w05.get(0)));
+        System.out.println(" step 1.0 -> " + exp2);
+        System.out.println("Relative error : " + Error.relativeError(exp2, w05.get(1)));
+        System.out.println("Absolute Error : " + Error.absoluteError(exp2, w05.get(1)));
     }
 
 
-
-    public static double findSpecialRoot(fYT f, double t1, double t2, double w1, double w2)
-    {
+    public static double findSpecialRoot(Fty f, double t1, double t2, double w1, double w2) {
         double root = NaN;
         double epsilon = 1e-200;
         List<Double> p_stages = new ArrayList<>();
-        System.out.println("between t [ "+ t1 + "  " + t2 + " ]");
-        System.out.println(" f(a) = "+ w1 + "  , f(b) = "+ w2);
+        System.out.println("between t [ " + t1 + "  " + t2 + " ]");
+        System.out.println(" f(a) = " + w1 + "  , f(b) = " + w2);
         //storing the left most value
         double leftmost_t = t1, leftmost_w = w1;
 
-        while(Math.abs(t2-t1)>epsilon)
+        while (Math.abs(t2 - t1) > epsilon)
         {
             //hope the formula is correct
             root = t2 - ((t2-t1)/(w2-w1)*w2);
