@@ -10,6 +10,7 @@ public class LinearLeastSquares
 {
     double[] xs, ys;
     double XAvg,YAvg,XYAvg,X2Avg;
+    boolean OUTPUT = false;
     public LinearLeastSquares(double [] xs, double [] ys)
     {
         if (xs.length != ys.length) throw new IllegalArgumentException("X,Y must have the same siza");
@@ -59,7 +60,7 @@ public class LinearLeastSquares
     {
         private Matrix a;
         private final Fx<Double> g = (x) -> {
-            System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + " + a.matrix[2][0] + " x^2");
+            //System.out.println(a.matrix[0][0] + " + " + a.matrix[1][0] + "x + " + a.matrix[2][0] + " x^2");
             return a.matrix[0][0] + a.matrix[1][0] * x + a.matrix[2][0] * pow(x, 2);
         };
 
@@ -89,16 +90,18 @@ public class LinearLeastSquares
             double x3Avg = x3sum / this.xs.length;
             double x4Avg = x4sum / this.xs.length;
             Matrix matrix = new Matrix(new double[][]{
-                    {1    , XAvg , X2Avg},//x3
-                    {XAvg , X2Avg, x3Avg},//x4
+                    {1, XAvg, X2Avg},//x3
+                    {XAvg, X2Avg, x3Avg},//x4
                     {X2Avg, x3Avg, x4Avg} //x5
             });      //x3    x4     x5     x6
 
-
-            System.out.println("Quadratic");
-            matrix.printMatrix();
             Matrix r = new Matrix(new double[]{YAvg, XYAvg, x2YAvg});
-            r.printMatrix();
+
+            if (OUTPUT) {
+                System.out.println("Quadratic");
+                matrix.printMatrix();
+                r.printMatrix();
+            }
             this.a = Matrix.multiply(new Matrix(Matrix.invert(matrix.getMatrix())), r);
         }
 
@@ -153,13 +156,15 @@ public class LinearLeastSquares
             double x5Avg = x5sum / this.xs.length;
             double x6Avg = x6sum / this.xs.length;
             Matrix matrix = new Matrix(new double[][]{
-                    {1    , XAvg , X2Avg  , x3Avg},//x3
-                    {XAvg , X2Avg, x3Avg  , x4Avg},//x4
-                    {X2Avg, x3Avg, x4Avg  , x5Avg}, //x5
-                    {x3Avg, x4Avg, x5Avg  , x6Avg }
+                    {1, XAvg, X2Avg, x3Avg},//x3
+                    {XAvg, X2Avg, x3Avg, x4Avg},//x4
+                    {X2Avg, x3Avg, x4Avg, x5Avg}, //x5
+                    {x3Avg, x4Avg, x5Avg, x6Avg}
             });      //x3    x4     x5     x6
-            System.out.println("Cubic ");
-            matrix.printMatrix();
+            if (OUTPUT) {
+                System.out.println("Cubic ");
+                matrix.printMatrix();
+            }
             Matrix r = new Matrix(new double[]{YAvg, XYAvg, x2YAvg, x3YAvg});  //x3YAvg
             this.a = Matrix.multiply(new Matrix(Matrix.invert(matrix.getMatrix())), r);
         }

@@ -1,6 +1,5 @@
 package NM.Polynomials;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,17 +13,17 @@ class LinearLeastSquaresTest {
 
     @Test
     void values() {
-        linear = new LinearLeastSquares(xs,ys);
-        quadratic = new LinearLeastSquares.Quadratic(xs,ys);
-        cubic = new LinearLeastSquares.Cubic(xs,ys);
+        linear = new LinearLeastSquares(xs, ys);
+        quadratic = new LinearLeastSquares.Quadratic(xs, ys);
+        cubic = new LinearLeastSquares.Cubic(xs, ys);
 
 
-        System.out.println(linear.g(0.4));
-        System.out.println(quadratic.g(0.4));
-        System.out.println(cubic.g(0.4));
+        //System.out.println(linear.g(0.4));
+        //System.out.println(quadratic.g(0.4));
+        //System.out.println(cubic.g(0.4));
 
 
-        System.out.println();
+        //System.out.println();
     }
 
     @Test

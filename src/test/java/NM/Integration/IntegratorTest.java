@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static java.lang.Math.abs;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IntegratorTest {
@@ -57,7 +58,7 @@ class IntegratorTest {
     @Test
     @DisplayName("Solve")
     void Solve() {
-        //assertEquals(t.integrate(),t.nRule(xs[0],xs[xs.length-1]));
-        System.out.println(t.integrate());
+        assertEquals(t.integrate(), t.nRule(xs[0], xs[xs.length - 1]), 1e-1);
+        //System.out.println(t.integrate());
     }
 }

@@ -15,13 +15,11 @@ class Runge_kutta4thTest {
     @DisplayName("Step")
     void Step() {
         Fty<Double> f = (t, y) -> exp(-t) - pow(y, 2);
-
         Solver rk = new Runge_kutta4th(f).setInitialValue(0).setTimeFinal(1);
         double h = .5;
         rk.setH(h);
         rk.step(rk.getW(), h);
         assertEquals(.36609, rk.getW(5));
-        System.out.println(rk.getW());
         rk.setInitialTime((float) (0 + h));
         rk.step(rk.getW(), h);
         assertEquals(.5025, rk.getW(6));

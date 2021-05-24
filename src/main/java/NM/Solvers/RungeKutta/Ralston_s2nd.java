@@ -8,21 +8,18 @@ public class Ralston_s2nd extends Solver {
         super(f);
     }
 
-    @Override
-    public void step(double w, double h) {
-        double k1 = h * this.f.f_y(this.t, w);
-        double k2 = h * this.f.f_y(this.t + ((2 / 3.) * h), w + ((2 / 3.) * k1));
-        this.w = w + ((1 / 4.) * (k1 + 3 * k2));
+    public static double Ralston2ndOrderStep(Fty<Double> f, double w, double h, double t) {
+        double dh = (2 * h / 3);
+        double k = w + dh * f.f(t, w);
+        double k2 = f.f(t, w) + (3 * f.f((t + dh), w + k));
+        return w + ((h / 4) * k2);
     }
 
-    public static double Ralston2ndOrderStep(Fty<Double> f, double w, double h, double t) {
-        double k1 = h * f.f_y(t, w);
-        //System.out.print("k1\t: "+ k1+"\t");
-        double k2 = h * f.f_y(t + ((2 / 3.) * h), w + ((2 / 3.) * k1));
-        //System.out.print("\tk2\t: "+k2 + "\t\t");
-        double next = w + ((1 / 4.) * h * (k1 + 3 * k2));
-        //System.out.println("w(i+1)\t: "+next);
-        return next;
+    @Override
+    public void step(double w, double h) {
+        double k1 = h * this.f.f(this.t, w);
+        double k2 = h * this.f.f(this.t + ((2 / 3.) * h), w + ((2 / 3.) * k1));
+        this.w = w + ((1 / 4.) * (k1 + 3 * k2));
     }
 
 

@@ -1,6 +1,6 @@
 package NM.Util.Exercises;
 
-import NM.Solvers.Pred_Corr.Adam_Bashforth;
+import NM.Solvers.MultiStep.Adam_Bashforth;
 import NM.Solvers.RungeKutta.Runge_kutta4th;
 import NM.Solvers.Solver;
 import NM.Util.Error.Error;
